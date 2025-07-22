@@ -1,9 +1,6 @@
-void Z(const string& s, const string& p)
+vector<int> Z(const string& p)
 {
-    string s1 = p + '#' + s;
-
-    int n = s1.size();
-
+    int n = p.size();
     vector<int> z(n);
     z[0]  = n;
     int l = 0, r = 0;
@@ -13,7 +10,7 @@ void Z(const string& s, const string& p)
         {
             z[i] = min(r - i, z[i - l]);
         }
-        while (i + z[i] < n && s1[z[i]] == s1[i + z[i]])
+        while (i + z[i] < n && p[z[i]] == p[i + z[i]])
             z[i]++;
         if (i + z[i] > r)
         {
@@ -21,11 +18,5 @@ void Z(const string& s, const string& p)
             r = i + z[i];
         }
     }
-    int ans = 0;
-    for (int i = p.size() + 1; i < n; ++i)
-    {
-        if (z[i] == p.size())
-            ans++;
-    }
-    cout << ans << '\n';
+    return z;
 }
