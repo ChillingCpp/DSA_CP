@@ -52,14 +52,7 @@ struct aho_corasick
     // If I'm currently at state X and I see character C, which state should I move to?
     int go(int state, char c)
     {
-        int cidx = c - 'a';
-
-        // Follow failure links until we find a valid transition
-        while (state != -1 && t[state].nxt[cidx] == -1)
-            state = t[state].link;  // Follow failure link
-
-        // If we fell off the trie, go to root; otherwise use the transition
-        return (state == -1) ? 0 : t[state].nxt[cidx];
+        return t[state].nxt[c - 'a'];
     }
     vector<int> get_sindex(int p)
     {
