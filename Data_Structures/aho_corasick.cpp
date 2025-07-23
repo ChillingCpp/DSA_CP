@@ -17,7 +17,7 @@ struct aho_corasick
         int p = 0;
         for (char c : s)
         {
-            if (t[p].nxt[c] == -1)
+            if (!t[p].nxt[c])
             {
                 t[p].nxt[c] = t.size();
                 t.emplace_back();
@@ -33,13 +33,12 @@ struct aho_corasick
         queue<int> q;
         for (q.push(0); q.size(); q.pop())
         {
-            // process the front node in queue
-            int curr = q.front(), link = t[curr].link;
-            if (curr)
-                t[curr].exit = t[link].leaf.size() ? link : t[link].exit;
-            for (int i = 0; i < 26; i++)
+            int cur = q.front(), link = t[cur].link;  // point to the longest proper prefix
+            if (cur)
+                t[cur].exit = t[link].leaf.size() ? link : t[link].exit;
+            for (int i = 0; i < 26; ++i)
             {
-                int &nxt = t[curr].nxt[i], nxt_sf = curr ? t[link].nxt[i] : 0;
+                int &nxt = t[cur].nxt[i], nxt_sf = cur ? t[link].nxt[i] : 0;
                 if (nxt == -1)
                     nxt = nxt_sf;
                 else
@@ -49,6 +48,18 @@ struct aho_corasick
                 }
             }
         }
+    }
+    // If I'm currently at state X and I see character C, which state should I move to?
+    int go(int state, char c)
+    {
+        int cidx = c - 'a';
+
+        // Follow failure links until we find a valid transition
+        while (state != -1 && t[state].nxt[cidx] == -1)
+            state = t[state].link;  // Follow failure link
+
+        // If we fell off the trie, go to root; otherwise use the transition
+        return (state == -1) ? 0 : t[state].nxt[cidx];
     }
     vector<int> get_sindex(int p)
     {
