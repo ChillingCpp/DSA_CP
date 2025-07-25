@@ -1,3 +1,8 @@
+const int MAXN = 1e6 + 5;
+int       a[MAXN];
+int       pref[MAXN];
+int       freq[1 << 20];
+
 struct Mo
 {
     // work with any operation.
