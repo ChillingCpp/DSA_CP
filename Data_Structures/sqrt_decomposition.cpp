@@ -16,7 +16,17 @@ struct Mo
     {
         return a - b;
     }
-    int L = 0, R = 0;
+
+    void add(int idx){
+        res += freq[op(pref[idx], k)];
+        freq[pref[idx]]++;
+    }
+    void remove(int idx){
+        freq[pref[idx]]--;
+        res -= freq[op(pref[idx], k)];
+    }
+        
+    
     struct Query
     {
         int l, r, idx;
@@ -97,7 +107,8 @@ struct Mo
         vector<ll> ans(q);
         ll         res = 0;
         freq[pref[0]]  = 1;  // pref[0] = 0
-
+        
+        int L = 0, R = 0;
         for (const auto& qr : queries)
         {
             int l = qr.l;
@@ -106,28 +117,23 @@ struct Mo
             while (R < r)
             {
                 ++R;
-                res += freq[op(pref[R], k)];
-                freq[pref[R]]++;
+                add(R);
             }
             while (R > r)
             {
-                freq[pref[R]]--;
-                res -= freq[op(pref[R], k)];
+                remove(R);
                 --R;
             }
             while (L < l)
             {
-                freq[pref[L]]--;
-                res -= freq[op(pref[L], k)];
+                remove(L);
                 ++L;
             }
             while (L > l)
             {
                 --L;
-                res += freq[op(pref[L], k)];
-                freq[pref[L]]++;
+                add(L);
             }
-
             ans[qr.idx] = res;
         }
 
