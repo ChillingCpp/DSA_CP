@@ -50,11 +50,10 @@ struct Mo
                 
                 static const int rotateDelta[4] = { 3, 0, 0, 1 };
 
-                int nrot = (rot + rotateDelta[seg]) & 3;
+                rot = (rot + rotateDelta[seg]) & 3;
 
                 int nx = x & (hp - 1), ny = y & (hp - 1);
                 res += seg * (1ll << (2 * p - 2));
-                rot = nrot;
                 switch (seg)
                 {
                     case 0:
