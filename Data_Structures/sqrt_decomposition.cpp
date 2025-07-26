@@ -37,7 +37,7 @@ struct Mo
             ord = hilbertOrder(l, r, pow);
         }
 
-        ll hilbertOrder(int x, int y, int pow)
+        inline ll hilbertOrder(int x, int y, int pow)
         {
             ll d = 0;
             for (int s = pow - 1; s >= 0; --s)
