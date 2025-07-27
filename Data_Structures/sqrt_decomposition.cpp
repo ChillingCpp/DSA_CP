@@ -1,8 +1,4 @@
-const int MAXN = 1e6 + 5;
-int       a[MAXN];
-int       pref[MAXN];
-int       freq[1 << 20];
-
+// Mo algorithms, a technique using sqrt decomposition
 struct Mo
 {
     // work with any operation.
@@ -17,13 +13,11 @@ struct Mo
         return a - b;
     }
 
-    void add(int idx){
-        res += freq[op(pref[idx], k)];
-        freq[pref[idx]]++;
+    void add(ll res, int idx){
+        /// adding an element to current range, O(1) or O(log n)
     }
-    void remove(int idx){
-        freq[pref[idx]]--;
-        res -= freq[op(pref[idx], k)];
+    void remove(ll res, int idx){
+        /// remove an element from current range, O(1) or O(log n)
     }
         
     
@@ -32,12 +26,11 @@ struct Mo
         int l, r, idx;
         ll  ord;
 
-        void calcOrder(int pow = 21)
+        Query(int l_, int r_, int idx_) : l(l_), r(r_), idx(idx_)
         {
-            ord = hilbertOrder(l, r, pow);
+            ord - hilbert_order(l, r, 20);
         }
-
-        inline ll hilbertOrder(int x, int y, int pow)
+        inline ll hilbert_order(int x, int y, int pow)
         {
             // true hilbert, in right order so faster than Z order
             ll  res = 0;
@@ -84,27 +77,21 @@ struct Mo
 
         for (int i = 0; i < n; ++i)
             cin >> a[i];
-        int pow = 0;
-        while ((1 << pow) < n)
-            pow++;
-        pref[0] = 0;
-        for (int i = 0; i < n; ++i)
-            pref[i + 1] = op(pref[i], a[i]);
+
+        // calc something
 
         vector<Mo::Query> queries(q);
         for (int i = 0; i < q; ++i)
         {
             int l, r;
             cin >> l >> r;
-            queries[i] = { l - 1, r, i };  // convert to 0-based for pref[l-1..r)
-            queries[i].calcOrder(pow);
+            queries[i] = { l - 1, r - 1, i };  // convert to 0-based
         }
 
         sort(queries.begin(), queries.end());
 
         vector<ll> ans(q);
         ll         res = 0;
-        freq[pref[0]]  = 1;  // pref[0] = 0
         
         int L = 0, R = 0;
         for (const auto& qr : queries)
@@ -115,22 +102,22 @@ struct Mo
             while (R < r)
             {
                 ++R;
-                add(R);
+                add(res, R);
             }
             while (R > r)
             {
-                remove(R);
+                remove(res, R);
                 --R;
             }
             while (L < l)
             {
-                remove(L);
+                remove(res, L);
                 ++L;
             }
             while (L > l)
             {
                 --L;
-                add(L);
+                add(res, L);
             }
             ans[qr.idx] = res;
         }
