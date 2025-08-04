@@ -72,124 +72,102 @@ private:
 
 
 // support lazy propagations.
-template<typename T>
-struct LazySegmentTree
+struct Lazysegtree
 {
-    LazySegmentTree(vi& a)
+    vector<ll> st, lazy;
+    int        n, h;
+    Lazysegtree(vector<int>& a)
     : st(2 * a.size())
     , n(a.size())
-    , lazy(a.size(), 1e18)  // the first value never get used, no need a boolean array
+    , lazy(a.size())
     {
         h = 32 - __builtin_clz(n);
         std::copy(a.begin(), a.end(), st.begin() + n);
-        build(0, n);
+        for (int i = n - 1; i > 0; --i)
+            st[i] = op1(st[i << 1], st[i << 1 | 1]);
     }
-
-
-    // 3 helper functions
-    // len : length of the interval
-    
-    
-    // assume 1e18 is the value we never used, so when a lazy have this value mean it hasnt been updated yet.
-    void calc(int p, int len)
+    void modify(int l, int r, int value)
     {
-        if (lazy[p] != 1e18)
-        {
-            apply(p << 1, lazy[p], len);
-            apply(p << 1 | 1, lazy[p], len);
-            lazy[p] = 1e18;
-        }
-        st[p] = op(st[p << 1], st[p << 1 | 1]);  // FIX: recalculate after propagating
-    }
-    // add a value to lazy, if you want assignment then just remove lazy[p] += val
-    void apply(int p, int val, int len)
-    {
-        if (p < n)
-        {
-            if (lazy[p] == 1e18)
-                lazy[p] = val;  
-            else
-                lazy[p] += val;  
-        }
-        st[p] += val;
-    }
-    void push(int l, int r)
-    {
-        int s = h, len = 1 << (h - 1);
-        for (l += n, r += n - 1; s > 0; --s, len >>= 1)
-            for (int i = l >> s; i <= r >> s; ++i)
-                calc(i, len);
-    }
-
-    // mains function : modify, query, build
-    void modify(int l, int r, int val)  // modify [l, r]
-    {
- 
-        if (val == 1e18)
+        if (value == 0)
             return;
-
-        push(l, l + 1);
-        push(r, r + 1);
-
+        r++;  // work with [l, r]
+        push(l);
+        push(r - 1);
         int l0 = l, r0 = r, len = 1;
-        for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1, len <<= 1)
+        for (l += n, r += n; l < r; l >>= 1, r >>= 1, len <<= 1)
         {
             if (l & 1)
-                apply(l++, val, len);
+                apply(l++, value, len);
             if (r & 1)
-                apply(--r, val, len);
+                apply(--r, value, len);
         }
-
-
-        build(l0, l0 + 1);
-        build(r0, r0 + 1);
+        build(l0);
+        build(r0 - 1);
     }
-    void build(int l, int r)
-    {
-        int len = 2;
-        for (l += n, r += n - 1; l > 1; len <<= 1)
-        {
-            l >>= 1, r >>= 1;
-            for (int i = r; i >= l; --i)
-                calc(i, len);
-        }
-    }
-    ll query(int l, int r)
-    {
 
-        push(l, l + 1);
-        push(r, r + 1);
-
-        ll res = 0;
-        for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1)
+    int query(int l, int r)
+    {
+        r++;  // work with [l, r]
+        push(l);
+        push(r - 1);
+        int res = 0;
+        for (l += n, r += n; l < r; l >>= 1, r >>= 1)
         {
             if (l & 1)
-                res = op(res, st[l++]);
+                res = op1(res, st[l++]);
             if (r & 1)
-                res = op(res, st[--r]);
+                res = op1(res, st[--r]);
         }
         return res;
     }
 
-    ll op(ll a, ll b)
-    {
-        return max(a, b);
-    }
-
-    // in case you want modify using op and query using op2 or vice versa.
-    ll op2(ll a, ll b)
+private:
+    ll op1(ll a, ll b)
     {
         return a + b;
     }
-    friend std::ostream& operator<<(std::ostream& out, LazySegmentTree& lst)
+    ll op2(ll a, ll b)
+    {
+        return max(a, b);
+    }
+    void calc(int p, int len)
+    {
+        if (lazy[p] == 1e18)
+            st[p] = op1(st[p << 1], st[p << 1 | 1]);
+        else
+            st[p] = lazy[p] * len;  // if range sum
+    }
+
+    void apply(int p, int value, int len)
+    {
+        st[p] = value * len;  // if range sum
+        if (p < n)
+            lazy[p] = value;  // assign, if addition or subtraction then just do lazy[p] += value or
+                              // lazy[p] -= value;
+    }
+    void build(int l)
+    {
+        for (int p = (l + n) >> 1, len = 2; p > 1; len <<= 1)
+            calc(p, len);
+    }
+
+    void push(int l)
+    {
+        for (int s = h, len = 1 << (h - 1); s > 0; --s, len >>= 1)
+        {
+            int i = (l + n) >> s;
+            if (lazy[i] != 1e18)
+            {
+                apply(i << 1, lazy[i], len);
+                apply(i << 1 | 1, lazy[i], len);
+                lazy[i] = 1e18;
+            }
+        }
+    }
+    friend std::ostream& operator<<(std::ostream& out, Lazysegtree& lst)
     {
         print(lst.st);
         // print(lst.lazy);
         return out;
     }
-
-private:
-    int n, h;
-    vector<T>  st;
-    vector<T>  lazy;
 };
