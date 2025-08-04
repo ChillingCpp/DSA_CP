@@ -1,16 +1,16 @@
 vector<bool>        vis;
-vector<int>         paths;  // 2 * n
+vector<int>         paths;  // paths.reserve(2 * n);
 vector<vector<int>> a;
 
-void dfs(int u, int& idx)
+void dfs(int u)
 {
     vis[u]       = true;
-    paths[++idx] = u;
+    paths.push_back(u);
     for (int& v : a[u])
     {
         if (vis[v])
             continue;
-        dfs(v, idx);
-        paths[++idx] = u;
+        dfs(v);
+        paths.push_back(u);
     }
 }
