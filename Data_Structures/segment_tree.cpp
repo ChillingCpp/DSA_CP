@@ -141,9 +141,15 @@ private:
     void apply(int p, int value, int len)
     {
         st[p] = value * len;  // if range sum
-        if (p < n)
+        if (p < n){
             lazy[p] = value;  // assign, if addition or subtraction then just do lazy[p] += value or
                               // lazy[p] -= value;
+            // if assign
+            //if (lazy[p] == 1e18){
+            //    lazy[p] = value;
+            //}
+            //else lazy[p] += value; 
+        }
     }
     void build(int l)
     {
@@ -171,3 +177,4 @@ private:
         return out;
     }
 };
+
