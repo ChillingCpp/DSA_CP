@@ -72,9 +72,8 @@ void build_graph()
     int n = sccs.size();
     vi comp(n+1);
     for (int i = 0; i < n; ++i)
-    {
         for (auto& node : sccs[i]) comp[node] = i;
-    }
+    
     set<pii> st;
     for (int i = 1; i < a.size(); ++i)
         for (int v : a[i])
