@@ -75,9 +75,9 @@ void build_graph()
     {
         for (auto& node : sccs[i]) comp[node] = i;
     }
-    
+    set<pii> st;
     for (int i = 1; i < a.size(); ++i)
         for (int v : a[i])
-            if (comp[v] != comp[i]) conden[comp[i]].push_back(comp[v]);
-
+            if (comp[v] != comp[i]) st.insert({comp[i], comp[v]});
+    for (auto &e : st) conden[e.first].push_back(e.second);
 }
