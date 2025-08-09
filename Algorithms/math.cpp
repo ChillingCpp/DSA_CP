@@ -33,7 +33,7 @@ ll nCk(ll n, ll k, ll mod)
         num = (num * (n - i + 1)) % mod;
         denom = (denom * i) % mod;
     }
-    ll invdenom = binmod(denom, mod - 2, mod);
+    ll invdenom = binmod(denom, mod - 2, mod); // fermat little theorem
     return (num * invdenom) % mod;
 }
 
