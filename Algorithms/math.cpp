@@ -66,5 +66,5 @@ void precompute(ll mod)
         fac[i] = (i * fac[i-1]) % mod;
     inv_fac[n] = binmod(fac[n], mod - 2, mod);
     for (int i = n-1; i > 0; --i) 
-        inv_fac[i] = (inv_fac[i+1] * i) % mod;
+        inv_fac[i] = (inv_fac[i+1] * i+1) % mod;
 }
