@@ -153,7 +153,7 @@ private:
     }
     void build(int l)
     {
-        for (int p = (l + n) >> 1, len = 2; p > 1; len <<= 1)
+        for (int p = (l + n) >> 1, len = 2; p > 1; p >>= 1, len <<= 1)
             calc(p, len);
     }
 
@@ -177,4 +177,5 @@ private:
         return out;
     }
 };
+
 
