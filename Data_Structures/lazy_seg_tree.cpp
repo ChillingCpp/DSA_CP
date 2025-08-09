@@ -1,3 +1,4 @@
+// range assignment, if addition then we change = to += 
 struct SegmentTree
 {
 
