@@ -14,6 +14,7 @@ ll binmod(ll a, ll b, ll mod)
 
 ll nCk(ll n, ll k)
 {
+    if (k > n || k < 0) return 0;
     k = min(k, n - k);
     ll res = 1;
     for (ll i = 1; i <= k; ++i)
@@ -26,12 +27,13 @@ ll nCk(ll n, ll k)
 ll nCk(ll n, ll k, ll mod)
 {
     // mod is prime
+    if (k > n || k < 0) return 0;
     k = min(k, n - k);
-    ll num = 1, denom = 1;
-    for (ll i = 0; i < k; ++i)
+    ll nume = 1, denom = 1;
+    for (ll i = 1; i <= k; ++i)
     {
-        nume = (nume * (n - i)) % mod;
-        denom = (denom * i) % mod;
+        nume = (nume * (n - i + 1)) % mod;
+        denom = (denom * i)) % mod;
     }
     ll invdenom = binmod(denom, mod - 2, mod);
     return (nume / denom) % mod;
