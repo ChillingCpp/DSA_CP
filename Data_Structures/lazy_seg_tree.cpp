@@ -84,8 +84,8 @@ struct SegmentTree
 
         if (start != end)
         {
-            lazy[2 * node]     = lazy[node];
-            lazy[2 * node + 1] = lazy[node];
+            lazy[node << 1]     = lazy[node];
+            lazy[node << 1 | 1] = lazy[node];
         Ư
         lazy[node] = LLONG_MIN;
     }
