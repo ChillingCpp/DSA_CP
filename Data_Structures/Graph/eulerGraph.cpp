@@ -8,7 +8,7 @@ void dfs(int u)
     while (out[u])
     {
         for (auto& v : a[u])
-            dfs(--out[v]);
+            dfs(a[u][--out[v]);
     }
     paths.push_back(u);
 }
