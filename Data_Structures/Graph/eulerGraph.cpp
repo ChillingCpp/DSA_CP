@@ -1,16 +1,22 @@
 
 vector<vector<int>> a;
 vector<int>         in, out;
-vector<int>         paths;
+vector<int>         path;
 
 void dfs(int u)
 {
-    while (out[u])
+    stack<int> st;
+    st.push(u);
+    while (st.size())
     {
-        for (auto& v : a[u])
-            dfs(a[u][--out[v]);
+        int p = st.top();
+        if (out[p])
+            st.push(a[p][--out[p]);
+        else {
+            path.push_back(p);
+            st.pop();
+        }
     }
-    paths.push_back(u);
 }
 void euler()
 {
