@@ -12,10 +12,6 @@ struct DistSrc
     {
         return dist < other.dist;
     }
-    bool operator==(const DistSrc& other) const
-    {
-        return dist == other.dist && src == other.src;
-    }
 };
 
 struct Query
@@ -209,7 +205,7 @@ void solve()
         if (outdated)
             continue;
 
-        // Gặp nhau tại đỉnh u
+        // các source khác nhau gặp nhau tại đỉnh u
         for (const auto& other : owners[u].others(src))
             updateAnswer(src, other.src, d + other.dist);
 
@@ -223,7 +219,7 @@ void solve()
             int v  = edge.to;
             ll  nd = d + edge.weight;
 
-            // Gặp nhau trên cạnh (tại v)
+            // các source khác nhau gặp nhau trên cạnh (tại v)
             for (const auto& other : owners[v].others(src))
                 updateAnswer(src, other.src, nd + other.dist);
 
@@ -241,8 +237,23 @@ void solve()
     }
 }
 
+/// offline query + dijkstra
+/// bài toán : cho N đỉnh, M cạnh vô hướng, Q truy vấn dạng s t, tìm đường đi ngắn nhất từ s -> t
 
 /// thuật toán như sau : 
+
 // distsrc : { dist, src }
-// Item : { dist, node, src }
+// Item : { dist, node, src }, operator> compare dist min-heap
 // Owner : hàm insert, array<distsrc, 2>
+// insert : thay thế src nếu src tồn tại và d < data[i].d, return d < data[i].d
+// nếu không thì thay data[1] và swap nếu data[1] < data[0]
+
+// makekey function : hash 2 integer bằng shift a lên 32 bits, vì N, M <= 1e5
+// update_answer : find key {src, dest} and update distance for all duplicated queries, after that remove the key.
+
+// main loop :
+/// kiểm tra nhãn hiện tại ( [d, u, src] ) bị cũ, nếu rồi thì bỏ qua
+/// update ans tại các đỉnh source khác src đã từng tới  u
+/// duyệt các cạnh kề u là v và update ans tại các đỉnh source khác src đã từng tới v.
+/// push{nd, v, src};
+/// in kết quả từng truy vấn 
