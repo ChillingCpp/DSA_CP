@@ -13,7 +13,7 @@
                 for (int j = 0; j < n; ++j)
                 {
                     
-                    if (mask & (1 << j)) continue; // transition from i to j require j not in the mask
+                    if (mask & (1 << j)) continue; // transition from i to j require j not in the mask. but in some problem j can be revisited and rewrite the state, but in this case j not allowed to be revisited.
                     int newmask = mask | (1 << j);
                         dp[newmask][j] = min(dp[newmask][j], dp[mask][i] + dist[i][j]);
                 }
