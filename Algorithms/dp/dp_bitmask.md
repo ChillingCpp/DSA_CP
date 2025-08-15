@@ -3,7 +3,7 @@ dp bitmask sử dụng mask để đại diện cho tập con, ở các vị tr�
 đáp án thường sẽ ở dp[(1 << n) - 1][?] ( ? nếu như có thêm 1 biến phụ thuộc nữa )
 
 thuật toán thường có các độ phức tạp như O(n * 2^n), O(n^2 * 2^n), O(3^n) (duyệt submask của mask hiện tại )
-n thường nhỏ ( <= 20 )
+n thường nhỏ ( <= 20 ), nếu n lớn hơn ( <= 40 ) thì nên kết hợp kĩ thuật meet-in-the-middle
 
 
 
