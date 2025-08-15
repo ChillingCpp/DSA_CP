@@ -30,7 +30,7 @@ int tsp(vector<vector<int>>& dist)
     return ans;
 }
 
-/// bài toán : tìm 2 tập con S và T trong mảng A sao cho S khác T và sum(S) + sum(T) là max
+/// bài toán : tìm 2 tập con S và T trong mảng A sao cho S khác T và sum(S) + sum(T) là max, độ phức tạp 3 ^ n
 int masSum()
 {
     // Precompute sum for every mask
