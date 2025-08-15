@@ -1,12 +1,10 @@
-ll dp[2][20][200];
 
 ll f(ll x)
 {
   // sometime we do not return when x = 0, just in case the problem not care about number 0 
     if (x <= 0)
         return 0;
-  
-    memset(dp, 0, sizeof(dp));
+    vvvi dp(2, vvi(20, vi(200)));
 
     vector<int> d;
     while (x)
