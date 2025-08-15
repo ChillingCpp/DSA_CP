@@ -15,7 +15,9 @@ ll f(ll x)
     reverse(d.begin(), d.end());
     int len     = d.size();
     int tot     = len * 9;
-    dp[1][0][0] = 1;
+  
+    dp[1][0][0] = 1; // tạo base case
+    /// duyệt từ chữ số hàng cao nhất tới thấp nhất
     for (int i = 0; i < len; i++)
     {
         for (int sum = 0; sum <= tot; sum++)
@@ -33,6 +35,8 @@ ll f(ll x)
             }
         }
     }
+
+    /// thu thập đáp án
     ll ans = 0;
     for (int tight = 0; tight < 2; ++tight)
     {
