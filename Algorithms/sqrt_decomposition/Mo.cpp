@@ -242,4 +242,5 @@ struct MoUpdate
 };
 
 /// Mo on tree or graph require some thing to turn these queries into a flat array, making range queries useful
+/// euler tour convert a tree into an array
 
