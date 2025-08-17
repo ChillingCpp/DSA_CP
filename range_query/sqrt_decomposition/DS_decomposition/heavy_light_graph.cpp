@@ -1,6 +1,9 @@
 
 
 /// compute something relative with vertices degree
+/// heavy vertices mean degree(v) >= sqrt(n);
+/// light mean degree(v) < sqrt(n);
+
 struct Sqrtheavylight
 {
     vvi a;

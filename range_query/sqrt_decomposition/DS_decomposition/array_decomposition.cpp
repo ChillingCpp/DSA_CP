@@ -33,54 +33,6 @@ struct SqrtDecomposition{
     }
 };
 
-
-// range query - range update
-struct SqrtLazy
-{
-    int n;
-    int S;
-    vector<ll> b;
-    vector<ll> a;
-    vector<ll> lazy;
-    SqrtDecomposition(vector<ll> &v) : n(v.size()), a(v)
-    {
-        S = (int) sqrt(n) + 1;
-        b.resize(S);
-        lazy.resize(S);
-        for (int i = 0; i < n; ++i)
-            b[i / S] += a[i];
-    }
-    
-    void apply(int bid)
-    {
-        int l = bid * S;
-        int r = (bid+1)* S -1;
-    }
-    ll update(int l, int r, ll val)
-    {
-        int c_l = l / S;
-        int c_r = r / S;
-        if (c_l == c_r)
-        {
-            apply(c_l);
-        }
-    }
-    /// range query - Immutable
-    ll query(int l, int r){
-
-        int c_l = l / S, c_r = r / S;
-        ll sum = 0;
-        if (c_l == c_r) for (int i = l; i <= r; ++i) sum += a[i];
-        else
-        { 
-            for (int i = l; i < (c_l + 1) * S; ++i) sum += a[i]; /// [l....last_c_l]
-            for (int i = c_r*S; i <= r; ++i) sum += a[i]; // [first....r]
-            for (int i = c_l + 1; i < c_r; ++i) sum += b[i]; // calculate the block fit in range
-        }
-        return sum;
-    }
-}
-
 // range query - range update
 struct SqrtLazy
 {

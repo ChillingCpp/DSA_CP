@@ -1,5 +1,8 @@
-
-/// Mo algorithm
+ll hilbert_order(int x, int y, int pow)
+{
+    ////// ..... /////// see hilbert_order.cpp for more information
+}
+/// Mo algorithm, using sqrt decomposition on euler tour and Mo query
 
 struct Motree
 {
