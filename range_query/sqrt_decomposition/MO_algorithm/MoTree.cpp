@@ -1,3 +1,4 @@
+
 ll hilbert_order(int x, int y, int pow)
 {
     ////// ..... /////// see hilbert_order.cpp for more information
@@ -6,10 +7,14 @@ ll hilbert_order(int x, int y, int pow)
 
 struct Motree
 {
-    struct Query{
+    struct Query
+    {
         int l, r, idx, ord;
 
-        Query(int l, int r, int i) : l(l), r(r), idx(i)
+        Query(int l, int r, int i)
+        : l(l)
+        , r(r)
+        , idx(i)
         {
             ord = hilbert_order(l, r, 20);
         }
@@ -18,28 +23,29 @@ struct Motree
             return ord < b.ord;
         }
     };
-    vector<int> euler, ST, EN, h, vis;
-    vvi&        a;
-    int         n;
-    /// we can using the up table to store more information, generalize its into a struct contain more information about the 2^i ancestor, and path to u
-    vector<vector<int>> a, up; 
-    vector<int>         st, en, depth; // binlift for Mo algorithm need st and en array
+    vector<int> euler;
+
+    /// we can using the up table to store more information, generalize its into a struct contain
+    /// more information about the 2^i ancestor, and information about path from 2^i ancestor to u
+    vector<vector<int>> a, up;
+    vector<int>         st, en, depth;  // binlift for Mo algorithm need st and en array
     int                 n, lg, timer;
 
-    Binlift(vector<vector<int>>& adj, int root = 1)
+    Motree(vector<vector<int>>& adj, int root = 1)
     : a(adj)
     , n(a.size())
     , timer(0)
     {
         lg = __lg(n) + 1;
         st.resize(n), en.resize(n), depth.resize(n);
-    
+        euler.reserve(2 * n);
+
         up.resize(n, vector<int>(lg));
         up[root][0] = root;
         depth[root] = 0;
         dfs(root, root);  // if root is 1
     }
-    
+
     bool is_ances(int u, int v)
     {
         return st[u] <= st[v] && en[v] <= en[u];
@@ -55,17 +61,19 @@ struct Motree
     }
     void dfs(int u, int p, int h = 0)
     {
-        st[u]    = ++timer;
-        
+        st[u] = ++timer;
+        euler.push_back(u);
         up[u][0] = p;
         for (int i = 1; i < lg; ++i)
             up[u][i] = up[up[u][i - 1]][i - 1];
 
-        for (int v : a[u]){
-            if (v == p) continue;
-            depth[v] = depth[u]+1;
-                dfs(v, u, h + 1);
-            
+        for (int v : a[u])
+        {
+            if (v == p)
+                continue;
+            depth[v] = depth[u] + 1;
+            dfs(v, u, h + 1);
+            euler.push_back(u);
         }
 
         en[u] = ++timer;
@@ -83,36 +91,10 @@ struct Motree
 
         return up[u][0];
     }
-    Motree(vvi& tree)
-    : a(tree)
-    , n(tree.size())
-    {
-        euler.reserve(2 * n);
-        ST.assign(n, -1);
-        EN.assign(n, -1);
-        h.assign(n, -1);
-        vis.assign(n, 0);
-        dfs(1);  // or 0 if 0 based
-        for (int i = 0; i < euler.size(); ++i)
-        {
-            if (ST[euler[i]] == -1) ST[euler[i]] = i;
-            else EN[euler[i]] = i;
-        }
-    }
-    void dfs(int u, int depth = 0)
-    {
-        vis[u] = true;
-        h[u]   = depth;
-        euler.push_back(u);
-        for (auto v : a[u])
-        {
-            if (vis[v])
-                continue;
 
-            dfs(v, depth + 1);
-            euler.push_back(u);
-        }
+    void solve()
+    {
+        int q;
+        cin >> q;
     }
-
 };
-
