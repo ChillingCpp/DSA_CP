@@ -5,11 +5,7 @@ public:
     {
         long long sum;
         int       len;
-        Node()
-        : sum(0)
-        , len(0)
-        {
-        }
+
         Node(long long s, int sz)
         : sum(s)
         , len(sz)
@@ -21,11 +17,6 @@ public:
     {
         bool      has_set;
         long long val;
-        Lazy()
-        : has_set(false)
-        , val(0)
-        {
-        }
         Lazy(bool hs, long long v)
         : has_set(hs)
         , val(v)
@@ -40,7 +31,7 @@ public:
 
     Node id_node()
     {
-        return Node();
+        return {0, 0};
     }
 
     Node transfer(Lazy f, Node node)
@@ -78,7 +69,7 @@ public:
     }
     Lazy id_lazy()
     {
-        return Lazy();
+        return {0, 0};
     }
     lazy_segtree()
     : lazy_segtree(0)
@@ -332,4 +323,5 @@ private:
             return 1;
         return 1u << (32 - __builtin_clz(x - 1));
     }
+
 };
