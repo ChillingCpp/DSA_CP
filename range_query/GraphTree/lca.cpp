@@ -4,22 +4,20 @@
 struct SegmentTree
 {
     vector<int> st;
-    vector<int> h, first, path,
-        vis;  // paths.reserve(2 * n), height.resize(n), vis.resize(n), first.resize(n)
+    vector<int> h, first, path;  // paths.reserve(2 * n), height.resize(n), vis.resize(n), first.resize(n)
     vector<vector<int>> a;
     int                 n;
 
-    void euler(int u, int depth = 0)
+    void euler(int u, int p, int depth = 0)
     {
-        vis[u]   = true;
         h[u]     = depth;
         first[u] = path.size();
         path.push_back(u);
         for (auto& v : a[u])
         {
-            if (vis[v])
+            if (v == p)
                 continue;
-            euler(v, depth + 1);
+            euler(v, u, depth + 1);
             path.push_back(u);
         }
     }
@@ -36,10 +34,9 @@ struct SegmentTree
         path.reserve(2 * n1);
 
         first.assign(n1, -1);
-        vis.assign(n1, 0);
         h.assign(n1, 0);
 
-        euler(1);
+        euler(1, 1);
         n = path.size();
         st.assign(2 * n, 0);
 
