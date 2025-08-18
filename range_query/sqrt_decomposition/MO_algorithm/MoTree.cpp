@@ -6,6 +6,18 @@ ll hilbert_order(int x, int y, int pow)
 
 struct Motree
 {
+    struct Query{
+        int l, r, idx, ord;
+
+        Query(int l, int r, int i) : l(l), r(r), idx(i)
+        {
+            ord = hilbert_order(l, r, 20);
+        }
+        bool operator<(const Query& b)
+        {
+            return ord < b.ord;
+        }
+    };
     vector<int> euler, ST, EN, h, vis;
     vvi&        a;
     int         n;
@@ -39,4 +51,5 @@ struct Motree
             euler.push_back(u);
         }
     }
+
 };
