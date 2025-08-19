@@ -1,7 +1,3 @@
-ll hilbert_order(int x, int y, int pow)
-{
-    ////// ..... /////// see hilbert_order.cpp for more information
-}
 
 /// Mo algorithm with updates
 struct MoUpdate
@@ -21,7 +17,10 @@ struct MoUpdate
         {
             ord = hilbert_order(l, r, 20);
         }
-        
+        inline ll hilbert_order(int x, int y, int pow)
+        {
+            ////// ..... /////// see hilbert_order.cpp for more information
+        }
         bool operator<(const Query& b)
         {
             return ord < b.ord;
@@ -113,3 +112,4 @@ struct MoUpdate
             cout << x << '\n';
     }
 };
+
