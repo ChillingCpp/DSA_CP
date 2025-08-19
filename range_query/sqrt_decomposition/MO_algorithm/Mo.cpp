@@ -1,7 +1,3 @@
-ll hilbert_order(int x, int y, int pow)
-{
-    ////// ..... /////// see hilbert_order.cpp for more information
-}
 
 // Mo algorithms, a technique using sqrt decomposition
 struct Mo
@@ -17,7 +13,10 @@ struct Mo
         {
             ord = hilbert_order(l, r, 20);
         }
-
+        inline ll hilbert_order(int x, int y, int pow)
+        {
+            ////// ..... /////// see hilbert_order.cpp for more information
+        }
         bool operator<(const Query& b)
         {
             return ord < b.ord;
