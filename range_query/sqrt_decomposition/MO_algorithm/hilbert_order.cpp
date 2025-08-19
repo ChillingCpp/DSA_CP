@@ -1,4 +1,4 @@
-ll hilbert_order(int x, int y, int pow)
+inline ll hilbert_order(int x, int y, int pow)
 {
     ll  res = 0;
     int rot = 0;
@@ -34,3 +34,4 @@ ll hilbert_order(int x, int y, int pow)
     return res;
 
 }
+
