@@ -76,7 +76,8 @@ struct MoUpdate
 
         vector<ll> ans(q);
 
-        int  L = 0, R = -1;
+        int L = queries[0].l, R = queries[0].l-1;
+        int t = -1;
         auto update = [&](int i, int x)
         {
             if (L <= i && i <= R)
@@ -86,7 +87,6 @@ struct MoUpdate
             }
             a[i] = x;
         };
-        int t = -1;
         for (const auto& qr : queries)
         {
             int l = qr.l;
@@ -112,4 +112,5 @@ struct MoUpdate
             cout << x << '\n';
     }
 };
+
 
