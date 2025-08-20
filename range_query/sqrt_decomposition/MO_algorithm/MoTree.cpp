@@ -52,6 +52,22 @@ struct Motree
         }
         return u;
     }
+    int lca(int u, int v)
+    {
+        if (is_ances(u, v))
+            return u;
+        if (is_ances(v, u))
+            return v;
+
+        for (int i = lg - 1; i >= 0; --i)
+            if (!is_ances(up[u][i], v))
+                u = up[u][i];
+
+        return up[u][0];
+    }
+
+
+    //// important !!!
     void dfs(int u, int p)
     {
         st[u]        = ++timer;
@@ -71,19 +87,7 @@ struct Motree
         en[u]        = ++timer;
         euler[timer] = u;
     }
-    int lca(int u, int v)
-    {
-        if (is_ances(u, v))
-            return u;
-        if (is_ances(v, u))
-            return v;
 
-        for (int i = lg - 1; i >= 0; --i)
-            if (!is_ances(up[u][i], v))
-                u = up[u][i];
-
-        return up[u][0];
-    }
 
 
     vector<int> val, freq, ans, vis;
@@ -197,5 +201,6 @@ struct Motree
             cout << ans[i] << '\n';
     }
 };
+
 
 
