@@ -43,7 +43,7 @@ struct Binlift
         for (int v : a[u]){
             if (v == p) continue;
             depth[v] = depth[u]+1;
-                dfs(v, u, h + 1);
+            dfs(v, u, h + 1);
             
         }
 
@@ -63,4 +63,5 @@ struct Binlift
         return up[u][0];
     }
 };
+
 
