@@ -49,7 +49,7 @@ struct Mo
 
         vector<ll> ans(q);
         
-        int L = 0, R = -1;
+        int L = queries[0].l, R = queries[0].l-1;
         for (const auto& qr : queries)
         {
             int l = qr.l;
