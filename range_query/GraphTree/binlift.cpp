@@ -65,3 +65,10 @@ struct Binlift
 };
 
 
+/// construct binary lifting algorithm :
+/// construct up[n][i] table, up table can store more information about the 2^i ancestor
+/// st[i], en[i] record the first occur/last seen in euler tour of node i
+/// up[v][i] = up[up[v][i - 1][i - 1]];
+/// is_ances(u, v) : check u is ancestor of v : st[u] <= st[v] && en[u] >= en[v];
+/// lca : first check u or v is ancestor, then lift u until u is ancestor of v, then return up[u][0] (parent of u) is the lca(u, v)
+///
