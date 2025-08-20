@@ -203,4 +203,14 @@ struct Motree
 };
 
 
+//// Mo on tree step by step :
+/// first code a binary lifting structure, see more in binlift.cpp, use a custom dfs euler path in this file.
+/// denote some thing :
+/// P = lca(u, v). if P == u then queries path is from [in[u], in[v]]
+/// if P != u and P != v then queries will be [en[u], in[v]] + lca node, for lca we will handle separately
+///
+/// 3 function : add, remove, check
+/// check mean if a node visited 2 times then that node is not in the current path from u -> v, remove it
+/// check code : vis[node] ? remove(node) : add[node], vis[node] ^= 1
+///
 
