@@ -98,9 +98,10 @@ public:
     {
         assert(0 <= p && p < _n);
         p += size;
+        /// push to child and update
         for (int i = log; i >= 1; i--)
             push(p >> i);
-        d[p] = x;
+        d[p] = x; // assign
         for (int i = 1; i <= log; i++)
             update(p >> i);
     }
@@ -109,6 +110,8 @@ public:
     {
         assert(0 <= p && p < _n);
         p += size;
+        
+        // push to child then get result
         for (int i = log; i >= 1; i--)
             push(p >> i);
         return d[p];
@@ -325,3 +328,4 @@ private:
     }
 
 };
+
