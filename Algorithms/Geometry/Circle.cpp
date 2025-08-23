@@ -1,9 +1,9 @@
 struct Circle
 {
-    ll    radius;
+    double    radius;
     Point p;
     Circle() = default;
-    Circle(ll r, const Point& p)
+    Circle(double r, const Point& p)
     : radius(r)
     , p(p)
     {
