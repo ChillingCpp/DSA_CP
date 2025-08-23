@@ -17,49 +17,48 @@ struct Vector
     {
     }  // construct vector ab
 
-    ll dot(Vector b)
+    ll dot(const Vector& b)
     {
         return x * b.x + y * b.y;
     }
-    ll cross(Vector b)
+    ll cross(const Vector& b)
     {
         return x * b.y - y * b.x;
     }
-    Vector& operator+=(Vector& b)
+    Vector& operator+=(const Vector& b)
     {
         x += b.x;
         y += b.y;
         return *this;
     }
-    Vector operator+(Vector& b)
+    Vector operator+(const Vector& b)
     {
         return { x + b.x, y + b.y };
     }
-    Vector& operator-=(Vector& b)
+    Vector& operator-=(const Vector& b)
     {
         x -= b.x;
         y -= b.y;
         return *this;
     }
-    Vector operator-(Vector& b)
+    Vector operator-(const Vector& b)
     {
         return { x - b.x, y - b.y };
     }
 };
-
-bool isCW(Point& a, Point& b, Point& c)
+bool isCW(const Point& a, const Point& b, const Point& c)
 {
     Vector ab(a, b);
     Vector ac(a, c);
     return ab.cross(ac) < 0;
 }
-bool isCCW(Point& a, Point& b, Point& c)
+bool isCCW(const Point& a, const Point& b, const Point& c)
 {
     Vector ab(a, b);
     Vector ac(a, c);
     return ab.cross(ac) > 0;
 }
-bool isCollinear(Point& a, Point& b, Point& c)
+bool isCollinear(const Point& a, const Point& b, const Point& c)
 {
     Vector ab(a, b);
     Vector ac(a, c);
