@@ -1,6 +1,22 @@
 struct Point
 {
     double x, y;
+    Point operator+(const Point& b)
+    {
+        return { x + b.x, y + b.y };
+    }
+    Point operator-(const Point& b)
+    {
+        return { x - b.x, y - b.y };
+    }
+    Point operator*(double k)
+    {
+        return { k * x, k * y };
+    }
+    Point operator/(double k)
+    {
+        return { x / k, x / k };
+    }
 };
 struct Vector
 {
@@ -33,11 +49,11 @@ struct Vector
     {
         return { x - b.x, y - b.y };
     }
-    Vector operator*(ll k)
+    Vector operator*(double k)
     {
         return { k * x, k * y };
     }
-    Vector operator/(ll k)
+    Vector operator/(double k)
     {
         return { x / k, x / k };
     }
