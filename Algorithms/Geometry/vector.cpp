@@ -17,11 +17,11 @@ struct Vector
     {
     }  // construct vector ab
 
-    ll dot(Vector& b)
+    ll dot(Vector b)
     {
         return x * b.x + y * b.y;
     }
-    ll cross(Vector& b)
+    ll cross(Vector b)
     {
         return x * b.y - y * b.x;
     }
