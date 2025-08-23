@@ -8,6 +8,12 @@ struct Circle
     , p(p)
     {
     }
+    Circle(const Point& a, const Point& b, const Point& c)
+    {
+        Point m1 = { (a.x + b.x) / 2, (a.y + b.y) / 2 };
+        Point m2 = { (c.x + b.x) / 2, (c.y + b.y) / 2 };
+        
+    }
     bool contain(const Point& b)
     {
         Vector pb(p, b);
@@ -15,10 +21,8 @@ struct Circle
     }
     bool intersect(const Segment& b)
     {
-
     }
     bool intersect(const Line& b)
     {
-        
     }
 };
