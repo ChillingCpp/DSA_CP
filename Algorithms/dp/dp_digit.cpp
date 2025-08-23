@@ -30,7 +30,7 @@ ll f(ll x)
                 for (int digit = 0; digit <= lim; ++digit)
                 {
                     int nxttight = (tight && digit == lim) ? 1 : 0;
-                    dp[nxttight][i + 1][sum + digit] += dp[tight][i][sum];
+                    dp[nxttight][i + 1][sum + digit] += dp[tight][i][sum]; // transition to state i + 1, different from compute state from previous state
                 }
             }
         }
