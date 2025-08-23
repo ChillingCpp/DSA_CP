@@ -11,7 +11,7 @@ struct Vector
     , y(y)
     {
     }
-    Vector(Point& a, Point& b)
+    Vector(const Point& a, const Point& b)
     : x(b.x - a.x)
     , y(b.y - a.y)
     {
