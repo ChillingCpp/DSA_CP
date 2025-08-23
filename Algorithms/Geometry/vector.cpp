@@ -1,12 +1,12 @@
 struct Point
 {
-    ll x, y;
+    double x, y;
 };
 struct Vector
 {
-    ll x, y;
+    double x, y;
     Vector() = default;
-    Vector(ll x, ll y)
+    Vector(double x, double y)
     : x(x)
     , y(y)
     {
@@ -17,33 +17,29 @@ struct Vector
     {
     }  // construct vector ab
 
-    ll dot(const Vector& b)
+    double dot(const Vector& b)
     {
         return x * b.x + y * b.y;
     }
-    ll cross(const Vector& b)
+    double cross(const Vector& b)
     {
         return x * b.y - y * b.x;
-    }
-    Vector& operator+=(const Vector& b)
-    {
-        x += b.x;
-        y += b.y;
-        return *this;
     }
     Vector operator+(const Vector& b)
     {
         return { x + b.x, y + b.y };
     }
-    Vector& operator-=(const Vector& b)
-    {
-        x -= b.x;
-        y -= b.y;
-        return *this;
-    }
     Vector operator-(const Vector& b)
     {
         return { x - b.x, y - b.y };
+    }
+    Vector operator*(ll k)
+    {
+        return { k * x, k * y };
+    }
+    Vector operator/(ll k)
+    {
+        return { x / k, x / k };
     }
 };
 bool isCW(const Point& a, const Point& b, const Point& c)
