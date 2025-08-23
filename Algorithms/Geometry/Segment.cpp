@@ -27,10 +27,10 @@ struct Segment
         Vector cb(c.a, b);
 
 
-        ll abac = ab.cross(ac);
-        ll abad = ab.cross(ad);
-        ll cdca = cd.cross(ca);
-        ll cdcb = cd.cross(cb);
+        double abac = ab.cross(ac);
+        double abad = ab.cross(ad);
+        double cdca = cd.cross(ca);
+        double cdcb = cd.cross(cb);
         if (abac == 0 || abad == 0 || cdca == 0 || cdcb == 0)
         {
             if (contain(c.a) || contain(c.b) || c.contain(a) || c.contain(b))
