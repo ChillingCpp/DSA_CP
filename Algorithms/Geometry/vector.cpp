@@ -58,6 +58,14 @@ struct Vector
         return { x / k, x / k };
     }
 };
+
+// rotate, using point a as a center
+Point rotate(const Point& a, const Point& b, double rad)
+{
+    Vector ab(a, b);
+    Vector nab(ab.x * cos(rad) - ab.y * sin(rad), ab.x * sin(rad) + ab.y * cos(rad)); // multiply 2 matrices [x, y][cos, -sin sin, cos]
+    return a + nab;
+}
 bool isCW(const Point& a, const Point& b, const Point& c)
 {
     Vector ab(a, b);
