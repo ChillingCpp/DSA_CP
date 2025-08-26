@@ -9,3 +9,10 @@ start another dfs, create old value then calculate new value dp[u], dp[v] of the
 reassign value dp[u], dp[v] to old value after dfs ( postorder )
 
 then we have dp[i] is the answer for the node i
+
+
+dp knapsack on tree
+
+
+
+dp tree smaller to larger merge optimization
