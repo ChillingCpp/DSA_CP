@@ -25,8 +25,8 @@ struct MaxFlow
     int h[MAXN], cntH[MAXN];
     // maxActiveH: chiều cao cao nhất hiện tại có đỉnh dư
     int maxActiveH;
-    // workCount: đếm số thao tác để kích hoạt global relabel định kỳ
-    int workCount;
+    // work: đếm số thao tác để kích hoạt global relabel định kỳ
+    int work;
 
     void addEdge(int u, int v, Flow capacity)
     {
@@ -35,7 +35,7 @@ struct MaxFlow
     }
     void updateHeight(int v, int newHeight)
     {
-        workCount++;
+        work++;
         // Giảm bộ đếm ở chiều cao cũ (nếu chưa bị xóa)
         if (h[v] < n)
             cntH[h[v]]--;
@@ -55,7 +55,7 @@ struct MaxFlow
     // Cập nhật lại tất cả chiều cao bằng BFS ngược từ đích (t)
     void globalRelabel()
     {
-        workCount = 0;
+        work = 0;
         // Reset chiều cao và bộ đếm
         for (int i = 0; i < n; i++)
         {
@@ -101,11 +101,8 @@ struct MaxFlow
         int  v    = e.to;
         Flow flow = min(excess[u], e.capacity);
 
-        if (flow == 0)
-            return;
-
         // Nếu v đang không có dư, sau khi nhận sẽ có → thêm vào hàng đợi
-        if (excess[v] == 0 && v != sink && v != source)
+        if (excess[v] == 0)
             activeList[h[v]].push_back(v);
 
         e.capacity -= flow;
@@ -169,7 +166,6 @@ struct MaxFlow
             if (e.capacity > 0)
                 push(source, e);
 
-      
         // Vòng lặp chính: xử lý các đỉnh có dư, ưu tiên chiều cao cao nhất
         for (maxActiveH = n - 1; maxActiveH >= 0; maxActiveH--)
         {
@@ -181,7 +177,7 @@ struct MaxFlow
                 if (excess[u] > 0)
                     discharge(u);
                 // Định kỳ cập nhật lại nhãn để giữ hiệu suất
-                if (workCount > 4 * n)
+                if (work > 4 * n)
                     globalRelabel();
             }
         }
