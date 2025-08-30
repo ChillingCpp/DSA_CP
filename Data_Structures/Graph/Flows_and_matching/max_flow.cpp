@@ -22,11 +22,9 @@ struct MaxFlow
     // excess[v]: lượng luồng dư tại đỉnh v
     Flow excess[MAXN];
     // h[v]: chiều cao của đỉnh v
-    int h[MAXN], cntH[MAXN];
+    int h[MAXN], cntH[MAXN], highest, work;
     // highest: chiều cao cao nhất hiện tại có đỉnh dư
-    int highest;
     // work: đếm số thao tác để kích hoạt global relabel định kỳ
-    int work;
 
     void addEdge(int u, int v, Flow capacity)
     {
@@ -156,9 +154,8 @@ struct MaxFlow
 
         if (source == sink)
             return -1;  // trường hợp đặc biệt
-      
-        for (int i = 0; i < n; i++)
-            excess[i] = 0;
+
+        fill(excess, excess + n, 0);
         excess[source] = INF;
         excess[sink]   = -INF;
         globalRelabel();
