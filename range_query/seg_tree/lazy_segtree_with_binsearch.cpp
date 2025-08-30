@@ -1,16 +1,11 @@
-struct lazy_segtree
-{
-public:
-    struct Node
+struct Node
     {
         long long sum;
         int       len;
-
         Node(long long s, int sz)
         : sum(s)
         , len(sz)
-        {
-        }
+        {}
     };
 
     struct Lazy
@@ -20,8 +15,7 @@ public:
         Lazy(bool hs, long long v)
         : has_set(hs)
         , val(v)
-        {
-        }
+        {}
     };
 
     Node op(Node a, Node b)
@@ -39,38 +33,31 @@ public:
         if (node.len == 0)
             return node;
         if (f.has_set)
-        {
             return Node(f.val * node.len, node.len);
-        }
-        else
-        {
-            return Node(node.sum + f.val * node.len, node.len);
-        }
+        return Node(node.sum + f.val * node.len, node.len);
     }
 
     /// nw nghĩa là lazy hiện tại, prev là lazy trước đó, hàm op này kết hợp nw và prev
     Lazy op_lazy(Lazy nw, Lazy prev)
     {
         if (nw.has_set)
-        {
             return nw;
-        }
         else
         {
             if (prev.has_set)
-            {
                 return Lazy(true, prev.val + nw.val);
-            }
             else
-            {
                 return Lazy(false, prev.val + nw.val);
-            }
         }
     }
     Lazy id_lazy()
     {
         return {0, 0};
     }
+struct lazy_segtree
+{
+public:
+    
     lazy_segtree()
     : lazy_segtree(0)
     {
@@ -89,9 +76,8 @@ public:
         for (int i = 0; i < _n; i++)
             d[size + i] = v[i];
         for (int i = size - 1; i >= 1; i--)
-        {
             update(i);
-        }
+        
     }
 
     void set(int p, Node x)
@@ -328,4 +314,3 @@ private:
     }
 
 };
-
