@@ -54,10 +54,10 @@ struct Node
     {
         return {0, 0};
     }
+
 struct lazy_segtree
 {
 public:
-    
     lazy_segtree()
     : lazy_segtree(0)
     {
@@ -73,65 +73,43 @@ public:
         log  = __builtin_ctz(size);
         d    = std::vector<Node>(2 * size, id_node());
         lz   = std::vector<Lazy>(size, id_lazy());
-        for (int i = 0; i < _n; i++)
-            d[size + i] = v[i];
+        std::copy(v.begin(), v.end(), d.begin() + size);
+
         for (int i = size - 1; i >= 1; i--)
             update(i);
-        
     }
 
     void set(int p, Node x)
     {
-        assert(0 <= p && p < _n);
         p += size;
-        /// push to child and update
-        for (int i = log; i >= 1; i--)
-            push(p >> i);
-        d[p] = x; // assign
-        for (int i = 1; i <= log; i++)
-            update(p >> i);
-    }
 
+        push1(p);
+        d[p] = x;  // assign
+        update1(p);
+    }
     Node get(int p)
     {
-        assert(0 <= p && p < _n);
         p += size;
-        
-        // push to child then get result
-        for (int i = log; i >= 1; i--)
-            push(p >> i);
+
+        push1(p);
         return d[p];
     }
-
     Node query(int l, int r)
     {
-        assert(0 <= l && l <= r && r <= _n);
         if (l == r)
             return id_node();
 
-        l += size;
-        r += size;
+        push(l, r);
 
-        for (int i = log; i >= 1; i--)
-        {
-            if (((l >> i) << i) != l)
-                push(l >> i);
-            if (((r >> i) << i) != r)
-                push((r - 1) >> i);
-        }
-
-        Node sml = id_node(), smr = id_node();
-        while (l < r)
+        Node ans = id_node();
+        for (l += size, r += size; l < r; l >>= 1, r >>= 1)
         {
             if (l & 1)
-                sml = op(sml, d[l++]);
+                ans = op(ans, d[l++]);
             if (r & 1)
-                smr = op(d[--r], smr);
-            l >>= 1;
-            r >>= 1;
+                ans = op(ans, d[--r]);
         }
-
-        return op(sml, smr);
+        return ans;
     }
 
     Node all_query()
@@ -141,56 +119,32 @@ public:
 
     void apply(int p, Lazy f)
     {
-        assert(0 <= p && p < _n);
         p += size;
-        // first push all to child
-        for (int i = log; i >= 1; i--)
-            push(p >> i);
-        
-        // apply lazy to leaf
+        push1(p);
+
         d[p] = transfer(f, d[p]);
 
-        // update again
-        for (int i = 1; i <= log; i++)
-            update(p >> i);
+        update1(p);
     }
     void apply(int l, int r, Lazy f)
     {
-        assert(0 <= l && l <= r && r <= _n);
         if (l == r)
             return;
 
         l += size;
         r += size;
 
-        /// first push all node in interval [l, r) to child node
-        for (int i = log; i >= 1; i--)
+        push(l, r);
+
+        for (int l2 = l, r2 = r; l2 < r2; l2 >>= 1, r2 >>= 1)
         {
-            if (((l >> i) << i) != l)
-                push(l >> i);
-            if (((r >> i) << i) != r)
-                push((r - 1) >> i);
+            if (l2 & 1)
+                all_apply(l2++, f);
+            if (r2 & 1)
+                all_apply(--r2, f);
         }
 
-
-        /// apply lazy to node in range [l, r)
-        {
-            int l2 = l, r2 = r;
-            while (l < r)
-            {
-                if (l & 1)
-                    all_apply(l++, f);
-                if (r & 1)
-                    all_apply(--r, f);
-                l >>= 1;
-                r >>= 1;
-            }
-            l = l2;
-            r = r2;
-        }
-
-        /// update the tree in range [l, r)
-        for (int i = 1; i <= log; i++)
+        for (int i = 1; i <= log; i++) /// update range [l, r)
         {
             if (((l >> i) << i) != l)
                 update(l >> i);
@@ -204,19 +158,38 @@ private:
     std::vector<Node> d;
     std::vector<Lazy> lz;
 
-    void update(int k)
-    {
-        d[k] = op(d[2 * k], d[2 * k + 1]); /// merge
-    }
     void all_apply(int k, Lazy f)
     {
-        d[k] = transfer(f, d[k]); /// apply to node
-        if (k < size) /// if still in parent then propagate lazy
-            lz[k] = op_lazy(f, lz[k]); 
+        d[k] = transfer(f, d[k]);  /// apply to node
+        if (k < size)              /// if still in parent then propagate lazy
+            lz[k] = op_lazy(f, lz[k]);
+    }
+    void push(int l, int r)
+    {
+        for (int i = log; i >= 1; i--)
+        {
+            if (((l >> i) << i) != l)
+                push(l >> i);
+            if (((r >> i) << i) != r)
+                push((r - 1) >> i);
+        }
+    }
+    void push1(int p)
+    {
+        for (int i = log; i >= 1; i--)
+            push(p >> i);
+    }
+    void update(int k)
+    {
+        d[k] = op(d[2 * k], d[2 * k + 1]);  /// merge
+    }
+    void update1(int p)
+    {
+        for (int i = 1; i <= log; i++)
+            update(p >> i);
     }
     void push(int k)
     {
-        /// apply lazy to children and set to 0 (have propagated)
         all_apply(2 * k, lz[k]);
         all_apply(2 * k + 1, lz[k]);
         lz[k] = id_lazy();
@@ -227,5 +200,4 @@ private:
             return 1;
         return 1u << (32 - __builtin_clz(x - 1));
     }
-
 };
