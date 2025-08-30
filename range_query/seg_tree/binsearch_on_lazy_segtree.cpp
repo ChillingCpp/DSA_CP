@@ -12,8 +12,7 @@
             return _n;
         l += size;
         /// push all child at index l
-        for (int i = log; i >= 1; i--)
-            push(l >> i);
+        push1(l);
         Node sm = id_node();
         
         // binary search, the left subtree is where answer is still valid
@@ -78,4 +77,5 @@
         } while ((r & -r) != r);
         return 0;
     }
+
 
