@@ -23,15 +23,16 @@ struct MaxFlow
     Flow excess[MAXN];
     // h[v]: chiều cao của đỉnh v
     int h[MAXN], cntH[MAXN];
-    // maxActiveH: chiều cao cao nhất hiện tại có đỉnh dư
-    int maxActiveH;
+    // highest: chiều cao cao nhất hiện tại có đỉnh dư
+    int highest;
     // work: đếm số thao tác để kích hoạt global relabel định kỳ
     int work;
 
     void addEdge(int u, int v, Flow capacity)
     {
-        adj[u].push_back({ v, (int) adj[v].size(), capacity });
-        adj[v].push_back({ u, (int) adj[u].size(), 0 });
+        Edge a{v, (int) adj[v].size(), capacity}, b{ u, (int) adj[u].size(), 0 };
+        adj[u].push_back(a);
+        adj[v].push_back(b);
     }
     void updateHeight(int v, int newHeight)
     {
@@ -45,26 +46,27 @@ struct MaxFlow
             return;  // đánh dấu không thể đến đích
 
         cntH[newHeight]++;
-        maxActiveH = max(maxActiveH, newHeight);
+        highest = max(highest, newHeight);
         gapList[newHeight].push_back(v);
 
         // Nếu đỉnh này có luồng dư, thêm vào danh sách xử lý
         if (excess[v] > 0)
             activeList[newHeight].push_back(v);
     }
-    // Cập nhật lại tất cả chiều cao bằng BFS ngược từ đích (t)
+
+    /// globalrelabel gồm có 2 nhiệm vụ chính :
+    /// reset lại các biến, không bao gồm excess flow
+    /// bfs ngược từ sink tới source
     void globalRelabel()
     {
+        /// reset lại toàn bộ các đỉnh cân xử lí
         work = 0;
-        // Reset chiều cao và bộ đếm
         for (int i = 0; i < n; i++)
         {
-            h[i]    = n;  // đánh dấu là "vô cực"
+            h[i]    = n; 
             cntH[i] = 0;
         }
-
-        // Xóa các danh sách cũ
-        for (int i = 0; i <= maxActiveH; i++)
+        for (int i = 0; i <= highest; i++)
         {
             activeList[i].clear();
             gapList[i].clear();
@@ -75,16 +77,15 @@ struct MaxFlow
         q.push(sink);
         h[sink] = 0;
       
-        while (!q.empty())
+        while (q.size())
         {
             int u = q.front();
             q.pop();
-            maxActiveH = h[u];  // cập nhật chiều cao cao nhất trong BFS
+            highest = h[u];  // cập nhật chiều cao cao nhất trong BFS
 
             for (const Edge& e : adj[u])
             {
-                // Nếu cạnh ngược tồn tại (tức là có thể đi từ e.to đến u)
-                // và đỉnh e.to chưa được thăm
+                // nếu e.to chưa được cập nhật và có cạnh ngược của e.to tới u
                 if (h[e.to] == n && adj[e.to][e.reverseid].capacity > 0)
                 {
                     h[e.to] = h[u] + 1;
@@ -136,7 +137,7 @@ struct MaxFlow
         else
         {
             /// không còn đỉnh nào ở h[u] ==> tất cả đỉnh >= h[u] không thể tới đích
-            for (int height = h[u]; height <= maxActiveH; height++)
+            for (int height = h[u]; height <= highest; height++)
             {
                 for (int w : gapList[height])
                     updateHeight(w, n);  // đánh dấu không thể tới đích
@@ -167,12 +168,12 @@ struct MaxFlow
                 push(source, e);
 
         // Vòng lặp chính: xử lý các đỉnh có dư, ưu tiên chiều cao cao nhất
-        for (maxActiveH = n - 1; maxActiveH >= 0; maxActiveH--)
+        for (highest = n - 1; highest >= 0; highest--)
         {
-            while (!activeList[maxActiveH].empty())
+            while (activeList[highest].size())
             {
-                int u = activeList[maxActiveH].back();
-                activeList[maxActiveH].pop_back();
+                int u = activeList[highest].back();
+                activeList[highest].pop_back();
 
                 if (excess[u] > 0)
                     discharge(u);
