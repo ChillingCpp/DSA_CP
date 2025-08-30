@@ -13,9 +13,12 @@ struct Dsu
     }
     int find(int x)
     {
-        for (x = parent[x]; x != parent[x]; x = parent[x])
-        {
-        }
+        /// path compression + union by size : O(α(n))
+        if (parent[x] != x) parent[x] = find(parent[x]);
+        return parent[x];
+
+        /// non compression ( O(log n) because use union by size )
+        for (; x != parent[x]; x = parent[x]){}
         return x;
     }
     bool unite(int x, int y)
