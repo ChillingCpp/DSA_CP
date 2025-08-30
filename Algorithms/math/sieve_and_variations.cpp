@@ -40,10 +40,9 @@ void segment_sieve(ll l, ll r)
     }
 
     for (auto p : pri)
-    {
         for (int j = max(p * p, (l + p - 1) / (p * p)); j <= R; j += p)
             sieve[j - l] = false;
-    }
+    
     if (l == 1) 
         sieve[0] = false;
     for (int i = l; i <= R; ++i) 
@@ -78,3 +77,4 @@ void        compute_phi()
             phi[j] -= phi[j] / i;  // phi[j] *= (i - 1) / i;
     }
 }
+
