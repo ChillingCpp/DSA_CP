@@ -28,8 +28,7 @@ void segment_sieve(ll l, ll r)
     int sqr = sqrt(r);
     /// sieve 1 to sqrt(r)
     vector<bool> mark(sqr + 1, 1);
-    vector<ll> pri;
-    vector<ll> sieve(r - l + 1, true), primes;
+    vector<ll> sieve(r - l + 1, true), primes, pri;
     for (int i = 2; i <= sqr; ++i)
     {
         if (mark[i]){
@@ -77,4 +76,5 @@ void        compute_phi()
             phi[j] -= phi[j] / i;  // phi[j] *= (i - 1) / i;
     }
 }
+
 
