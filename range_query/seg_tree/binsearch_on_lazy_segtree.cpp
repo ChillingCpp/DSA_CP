@@ -8,8 +8,6 @@
     template<class G>
     int max_right(int l, G g)
     {
-        assert(0 <= l && l <= _n);
-        assert(g(id_node()));
         if (l == _n)
             return _n;
         l += size;
@@ -51,8 +49,6 @@
     template<class G>
     int min_left(int r, G g)
     {
-        assert(0 <= r && r <= _n);
-        assert(g(id_node()));
         if (r == 0)
             return 0;
         r += size;
@@ -82,3 +78,4 @@
         } while ((r & -r) != r);
         return 0;
     }
+
