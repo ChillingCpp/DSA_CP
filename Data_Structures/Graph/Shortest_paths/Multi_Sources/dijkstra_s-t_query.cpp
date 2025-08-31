@@ -70,8 +70,9 @@ struct Owner
                     // Sắp xếp để data[0] <= data[1]
                     if (data[1] < data[0])
                         swap(data[0], data[1]);
+                    return true;
                 }
-                return d < data[i].dist;
+                return false;
             }
         }
 
@@ -146,7 +147,7 @@ void solve()
         return (1ll << 32) * a + b;  // Giả sử src < 1e6
     };
     unordered_map<ll, vector<int>> queryMap;
-    vector<ll>                     ans(M, INF);
+    vector<ll>                     ans(Q, INF);
 
     for (int i = 0; i < Q; ++i)
     {
@@ -205,13 +206,15 @@ void solve()
         if (outdated)
             continue;
 
+         // Cập nhật nhãn tại u, trước khi update 
+        if (!owners[u].insert(d, src))
+            continue;
+        
         // các source khác nhau gặp nhau tại đỉnh u
         for (const auto& other : owners[u].others(src))
             updateAnswer(src, other.src, d + other.dist);
 
-        // Cập nhật nhãn tại u
-        if (!owners[u].insert(d, src))
-            continue;
+       
 
         // Lan truyền đến các đỉnh kề
         for (const auto& edge : a[u])
@@ -219,11 +222,13 @@ void solve()
             int v  = edge.to;
             ll  nd = d + edge.weight;
 
-            // các source khác nhau gặp nhau trên cạnh (tại v)
+            // // các source khác nhau gặp nhau trên cạnh (tại v)
+            // Va chạm tại v (trên cạnh u-v)
             for (const auto& other : owners[v].others(src))
                 updateAnswer(src, other.src, nd + other.dist);
 
-            pq.push({ nd, v, src });
+            // if (owners[v].insert(nd, src))
+                pq.push({ nd, v, src });
         }
     }
 
