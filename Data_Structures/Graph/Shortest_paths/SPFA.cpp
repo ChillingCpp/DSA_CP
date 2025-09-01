@@ -1,30 +1,27 @@
 vector<vector<pii>> a;
-vector<int>         dist, vis, cnt;
+vector<ll>         dist, inq, cnt;
 
-vector<int> bellman_ford(int u)
+vector<int> SPFA(int u)
 {
     queue<int> q;
     q.push(u);
-    vis[u]  = true;
+    inq[u]  = true;
     dist[u] = 0;
 
     int n = a.size();  // vertices, if 1 based then a.size() - 1
-    while (!q.empty())
+    for (; q.size(); q.pop())
     {
         int u = q.front();
-        q.pop();
-        vis[u] = false;
-        for (auto i : a[u])
+        inq[u] = false;
+        for (auto& [v, w] : a[u])
         {
-            int v = i.first;
-            int w = i.second;
             if (dist[v] > dist[u] + w)
             {
                 dist[v] = dist[u] + w;
-                if (vis[v])
+                if (inq[v])
                     continue;
                 q.push(v);
-                vis[v] = true;
+                inq[v] = true;
                 cnt[v]++;
                 if (cnt[v] == n - 1)  // if relax n - 1 times mean we encountered a negative cycle
                     return { -1 };

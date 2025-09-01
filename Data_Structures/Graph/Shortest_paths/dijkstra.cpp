@@ -7,19 +7,15 @@ void dijkstra(int u)
     priority_queue<pii, vector<pii>, greater<pii>> pq;
     dist[u] = 0;
     pq.push({ 0, u });
-    while (pq.size())
+    for (; pq.size(); pq.pop())
     {
-        int u = pq.top().second;
-        int w = pq.top().first;
-        if (dist[u] != w)
-            continue;
-        for (auto& p : a[u])
+        auto [w, u] = pq.top();
+        for (auto& [v, w1] : a[u])
         {
-            int v  = p.first;
-            int w1 = p.second;
             if (dist[u] + w1 < dist[v])
             {
                 dist[v] = dist[u] + w1;
+                pq.push({dist[v], v});
             }
         }
     }

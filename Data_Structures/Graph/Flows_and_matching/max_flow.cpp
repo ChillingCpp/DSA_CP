@@ -183,3 +183,11 @@ struct MaxFlow
         return excess[sink] + INF;
     }
 };
+
+
+
+/// maxflow có 4 hàm chính :
+/// globalRelabel();
+/// push();
+/// discharge();
+/// updateHeight()
