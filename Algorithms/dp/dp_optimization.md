@@ -1,3 +1,8 @@
+
+[Learning DP optimization](https://codeforces.com/blog/entry/)
+[some practical problems](https://codeforces.com/blog/entry/47932)
+
+
 | Name                        | Original Recurrence                                   | Sufficient Condition of Applicability       | Original Complexity | Optimized Complexity | Links    |
 |-----------------------------|-------------------------------------------------------|--------------------------------------------|---------------------|----------------------|----------|
 | Convex Hull Optimization1   | $dp[i] = \min_{j<i} \{ dp[j] + b[j] \cdot a[i] \}$     | $b[j] \geq b[j+1]$<br>optionally $a[i] \leq a[i+1]$ | $O(n^2)$            | $O(n)$               | [1](https://web.archive.org/web/20181030143808/http://wcipeg.com/wiki/Convex_hull_trick) [2](https://cp-algorithms.com/geometry/convex_hull_trick.html) [3](https://codeforces.com/blog/entry/63823) [p1](https://codeforces.com/contest/319/problem/C) |
