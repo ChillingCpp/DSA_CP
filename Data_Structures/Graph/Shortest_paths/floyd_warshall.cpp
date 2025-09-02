@@ -1,4 +1,4 @@
-void floyd(vector<vector<int>>& a)
+void floyd(vector<vector<int>>& dist) /// adjacent matrix, not adjacent list
 {
     int V = dist.size();
     for (int k = 0; k < V; k++) {
