@@ -83,17 +83,11 @@ public:
     {
         p += size;
 
-        push1(p);
+        push(p, p + 1);
         d[p] = x;  // assign
-        update1(p);
+        update(p, p + 1);
     }
-    Node get(int p)
-    {
-        p += size;
-
-        push1(p);
-        return d[p];
-    }
+    
     Node query(int l, int r)
     {
         if (l == r)
@@ -117,15 +111,6 @@ public:
         return d[1];
     }
 
-    void apply(int p, Lazy f)
-    {
-        p += size;
-        push1(p);
-
-        d[p] = transfer(f, d[p]);
-
-        update1(p);
-    }
     void apply(int l, int r, Lazy f)
     {
         if (l == r)
@@ -144,15 +129,8 @@ public:
                 all_apply(--r2, f);
         }
 
-        for (int i = 1; i <= log; i++) /// update range [l, r)
-        {
-            if (((l >> i) << i) != l)
-                update(l >> i);
-            if (((r >> i) << i) != r)
-                update((r - 1) >> i);
-        }
+        update(l, r);
     }
-
 private:
     int               _n, size, log;
     std::vector<Node> d;
@@ -174,19 +152,20 @@ private:
                 push((r - 1) >> i);
         }
     }
-    void push1(int p)
+    void update(int l, int r)
     {
-        for (int i = log; i >= 1; i--)
-            push(p >> i);
+        for (int i = 1; i <= log; i++) /// update range [l, r)
+        {
+            if (((l >> i) << i) != l)
+                update(l >> i);
+            if (((r >> i) << i) != r)
+                update((r - 1) >> i);
+        }   
     }
+
     void update(int k)
     {
         d[k] = op(d[2 * k], d[2 * k + 1]);  /// merge
-    }
-    void update1(int p)
-    {
-        for (int i = 1; i <= log; i++)
-            update(p >> i);
     }
     void push(int k)
     {
@@ -201,3 +180,23 @@ private:
         return 1u << (32 - __builtin_clz(x - 1));
     }
 };
+
+/// các hàm này có thể thêm vào
+void pushp(int p)
+{
+    for (int i = log; i >= 1; i--)
+        push(p >> i);
+}
+void updatep(int p)
+{
+    for (int i = 1; i <= log; i++)
+        update(p >> i);
+}
+
+Node getDebug(int p)
+{
+    p += size;
+    
+    push(p, p + 1);
+    return d[p];
+}

@@ -14,9 +14,9 @@ public:
 
     void add(int p, int val)
     {
-        modify(p, st[p + n] + val);
+        set(p, st[p + n] + val);
     }
-    void modify(int p, int val)
+    void set(int p, int val)
     {
         st[p + n] = val;
         p += n;
