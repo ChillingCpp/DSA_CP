@@ -1,6 +1,7 @@
 
 [Learning DP optimization](https://codeforces.com/blog/entry/)
-[some practical problems](https://codeforces.com/blog/entry/47932)
+
+[Some practical problems](https://codeforces.com/blog/entry/47932)
 
 
 | Name                        | Original Recurrence                                   | Sufficient Condition of Applicability       | Original Complexity | Optimized Complexity | Links    |
