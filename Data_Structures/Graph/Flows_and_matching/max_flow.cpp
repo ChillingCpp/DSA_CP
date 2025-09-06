@@ -11,45 +11,34 @@ struct MaxFlow
     };
     const Flow INF = numeric_limits<Flow>::max();
 
-    int n;
-    int source, sink;
+    int n, source, sink;
 
     vector<Edge> adj[MAXN];
-    // activeList[h]: danh sách các đỉnh có excess > 0 và height = h
-    vector<int> activeList[MAXN];
-    // gapList[h]: danh sách các đỉnh có height = h (dùng trong global relabel)
-    vector<int> gapList[MAXN];
-    // excess[v]: lượng luồng dư tại đỉnh v
+
+    vector<int> activeList[MAXN], gapList[MAXN];
     Flow excess[MAXN];
-    // h[v]: chiều cao của đỉnh v
     int h[MAXN], cntH[MAXN], highest, work;
-    // highest: chiều cao cao nhất hiện tại có đỉnh dư
-    // work: đếm số thao tác để kích hoạt global relabel định kỳ
 
     void addEdge(int u, int v, Flow capacity)
     {
         Edge a{v, (int) adj[v].size(), capacity}, b{ u, (int) adj[u].size(), 0 };
-        adj[u].push_back(a);
-        adj[v].push_back(b);
+        adj[u].push_back(a), adj[v].push_back(b);
     }
     void updateHeight(int v, int newHeight)
     {
         work++;
         // Giảm bộ đếm ở chiều cao cũ (nếu chưa bị xóa)
-        if (h[v] < n)
-            cntH[h[v]]--;
+        if (h[v] < n)  cntH[h[v]]--;
         h[v] = newHeight;
 
-        if (newHeight >= n)
-            return;  // đánh dấu không thể đến đích
+        if (newHeight >= n)  return;  // đánh dấu không thể đến đích
 
         cntH[newHeight]++;
         highest = max(highest, newHeight);
         gapList[newHeight].push_back(v);
 
         // Nếu đỉnh này có luồng dư, thêm vào danh sách xử lý
-        if (excess[v] > 0)
-            activeList[newHeight].push_back(v);
+        if (excess[v] > 0) activeList[newHeight].push_back(v);
     }
 
     /// globalrelabel gồm có 2 nhiệm vụ chính :
@@ -88,7 +77,7 @@ struct MaxFlow
                 {
                     h[e.to] = h[u] + 1;
                     q.push(e.to);
-                    updateHeight(e.to, h[u] + 1);  // gọi updateHeight để cập nhật các cấu trúc
+                    updateHeight(e.to, h[u] + 1); 
                 }
             }
         }
@@ -101,16 +90,11 @@ struct MaxFlow
         Flow flow = min(excess[u], e.capacity);
 
         // Nếu v đang không có dư, sau khi nhận sẽ có → thêm vào hàng đợi
-        if (excess[v] == 0)
-            activeList[h[v]].push_back(v);
+        if (excess[v] == 0) activeList[h[v]].push_back(v);
 
-        e.capacity -= flow;
-        adj[v][e.reverseid].capacity += flow;
-        excess[u] -= flow;
-        excess[v] += flow;
+        e.capacity -= flow, adj[v][e.reverseid].capacity += flow;
+        excess[u] -= flow, excess[v] += flow;
     }
-
-    // "Phóng thích" đỉnh u: đẩy hết luồng dư ra ngoài
     void discharge(int u)
     {
         int minH = n; 
@@ -121,8 +105,7 @@ struct MaxFlow
                 if (h[u] == h[e.to] + 1)
                 {
                     push(u, e);
-                    if (excess[u] <= 0)
-                        return;  // đã hết dư
+                    if (excess[u] <= 0) return;  
                 }
                 else
                     minH = min(minH, h[e.to] + 1);
@@ -147,13 +130,9 @@ struct MaxFlow
     // hàm chính
     Flow maxFlow(int N, int s, int t)
     {
-        /// Khởi tạo các giá trị, đặt base value
-        n      = N;
-        source = s;
-        sink   = t;
+        n      = N, source = s, sink   = t;
 
-        if (source == sink)
-            return -1;  // trường hợp đặc biệt
+        if (source == sink) return -1; 
 
         fill(excess, excess + n, 0);
         excess[source] = INF;
@@ -161,10 +140,8 @@ struct MaxFlow
         globalRelabel();
 
         for (Edge& e : adj[source])
-            if (e.capacity > 0)
-                push(source, e);
+            if (e.capacity > 0) push(source, e);
 
-        // Vòng lặp chính: xử lý các đỉnh có dư, ưu tiên chiều cao cao nhất
         for (highest = n - 1; highest >= 0; highest--)
         {
             while (activeList[highest].size())
@@ -172,14 +149,11 @@ struct MaxFlow
                 int u = activeList[highest].back();
                 activeList[highest].pop_back();
 
-                if (excess[u] > 0)
-                    discharge(u);
-                // Định kỳ cập nhật lại nhãn để giữ hiệu suất
-                if (work > 4 * n)
-                    globalRelabel();
+                if (excess[u] > 0)  discharge(u);
+
+                if (work > 4 * n) globalRelabel();
             }
         }
-        // Luồng cực đại = lượng mà đích đã nhận thêm
         return excess[sink] + INF;
     }
 };

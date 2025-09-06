@@ -1,5 +1,3 @@
-
-
 ll euclid(ll a, ll b, ll &x, ll &y)
 {
     if (b == 0)
@@ -14,10 +12,10 @@ ll euclid(ll a, ll b, ll &x, ll &y)
     y = x1 - y1 * (a / b); 
 }
 
-ll invmod(ll a, ll b, ll m){
+ll invmod(ll a, ll m){
 
     ll x, y;
-    ll d = euclid(a, b, x, y);
+    ll d = euclid(a, m, x, y);
     if (d != 1) return -1;
     x = (x % m + m) % m;
     return x;

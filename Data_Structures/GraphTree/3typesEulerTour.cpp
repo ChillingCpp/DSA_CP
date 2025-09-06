@@ -18,8 +18,8 @@ void dfs(int u, int p)
     tout[u] = path.size() - 1;
 }
 
-/// dp on tree euler, if dp direction is from the parent to child (some dp require child to parent)
-/// then euler indexing is not workign, this version from usaco, best for subtree queries because
+/// dp on tree euler, if dp direction is from the child to parent
+/// then euler indexing is not working, this version from usaco, best for subtree queries because
 /// [in[u], out[u]-1] is the subtree of u
 vector<int>         tin, tout, order;  /// tin.resize(n), tout.resize(n), order.resize(n);
 vector<vector<int>> a;
@@ -43,7 +43,7 @@ vector<vector<int>> a;
 int                 timer = 0;  // if 1 based
 
 /// Mo algorithms ( not for dp on tree )
-/// this version not support lca, need a binary lifting or the 2*n - 1 euler tour
+/// this version not support lca, need a binary lifting
 void dfs(int u, int p)
 {
     tin[u]       = ++timer;
