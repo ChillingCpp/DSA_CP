@@ -43,7 +43,7 @@ int                 n = 1e6 + 2;
 vector<int>         prime(n, 1), divcnt(n, 1), divsum(n, 1), f(n), phi(n), spf(n), bpf(n);
 vector<vector<int>> divlist(n, { 1 });
 
-void sieve()
+void all_sieve()
 {
     divsum[0] = prime[0] = prime[1] = 0;
 
@@ -92,3 +92,4 @@ void sieve()
         }
     }
 }
+
