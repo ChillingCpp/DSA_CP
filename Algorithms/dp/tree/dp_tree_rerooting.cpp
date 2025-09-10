@@ -45,7 +45,7 @@ struct Rerooting
             include(v, u);
 
 
-            dfs(v, u);
+            rerooting(v, u);
 
 
             /// restore root
