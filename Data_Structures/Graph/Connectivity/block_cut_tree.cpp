@@ -1,4 +1,4 @@
-struct BCC
+struct BCT
 {
     struct Node { int disc = 0, low = 0, ap = 0; };
     vector<Node> vt;
