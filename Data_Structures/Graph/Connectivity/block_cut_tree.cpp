@@ -11,10 +11,8 @@ struct BCT
         vi c;
         while (st.size())
         {
-            auto e = st.top();
-            st.pop();
-            c.push_back(e.first);
-            c.push_back(e.second);
+            auto e = st.top(), st.pop();
+            c.push_back(e.first), c.push_back(e.second);
             if (e == ed) break;
         }
         comp.push_back(c);
