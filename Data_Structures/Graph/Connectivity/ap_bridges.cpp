@@ -41,7 +41,7 @@ struct Tarjan
                 tarjan(v, u);
                 /// if the v is in the component of u or v is discovery earlier than u then u is the
                 /// articular point
-                if (vt[u].disc <= vt[v].low)
+                if (p != -1 && vt[u].disc <= vt[v].low)
                     vt[u].ap = 1;
                 // if (disc[v] == low[u]) then we have encounterd a cycle, if we disconnected the
                 // edge {u, v} then nothing will happened
@@ -53,7 +53,7 @@ struct Tarjan
             else
                 vt[u].low = min(vt[u].low, vt[v].disc);
         }
-        if (child > 1)
+        if (p == -1 && child > 1)
             vt[u].ap = 1;
     }
     // main code //
