@@ -1,6 +1,7 @@
 struct Binlift
 {
     /// we can using the up table to store more information, generalize its into a struct contain more information about the 2^i ancestor, and path to u
+    /// dp + binary lifting, store idempoetence
     vector<vector<int>> a, up; 
     vector<int>         st, en, depth; // binlift for Mo algorithm need st and en array
     int                 n, lg, timer;
@@ -72,3 +73,4 @@ struct Binlift
 /// is_ances(u, v) : check u is ancestor of v : st[u] <= st[v] && en[u] >= en[v];
 /// lca : first check u or v is ancestor, then lift u until u is ancestor of v, then return up[u][0] (parent of u) is the lca(u, v)
 ///
+
