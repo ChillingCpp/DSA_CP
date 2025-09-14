@@ -7,6 +7,7 @@ struct BET
     vi           comp, bridge;
     int          n, time = 0;
 
+    /// edge : {to, id}. id is when we get input
     void build(vvpii& a, vpii& edges, int _n)
     {
         n = _n;
