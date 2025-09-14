@@ -5,9 +5,9 @@ struct BET
     vvi bet;
     int n, time = 0, cmp = 0;
     /// edge : {to, id}. id is when we get input
-    void build(vvi& a, vpii& ed, int _n)
+    void build(vvi& a, vpii& ed)
     {
-        n = _n;
+        n = a.size()-1;
         disc.resize(n + 1), low.resize(n + 1);
         comp.resize(n + 1), ins.resize(n + 1);
         id.resize(n + 1);
