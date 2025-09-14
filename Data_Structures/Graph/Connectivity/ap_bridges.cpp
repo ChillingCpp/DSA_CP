@@ -1,9 +1,7 @@
 struct Tarjan
 {
     struct Bridge
-    {
-        int u = 0, v = 0;
-    };
+    { int u = 0, v = 0;  };
     vvi            a, sccs;
     vector<int>    disc, low, ap;
     vector<Bridge> bridge;
@@ -28,8 +26,7 @@ struct Tarjan
         int child        = 0;
         for (int v : a[u])
         {
-            if (v == p)
-                continue;
+            if (v == p)  continue;
 
             if (!disc[v])
             {
@@ -39,12 +36,10 @@ struct Tarjan
                 if (disc[u] < low[v])  bridge.push_back({ u, v });
                 low[u] = min(low[u], low[v]);
             }
-            else
-                low[u] = min(low[u], disc[v]);
+            else low[u] = min(low[u], disc[v]);
         }
         if (p == -1 && child > 1)  ap[u] = 1;
     }
-    // main code //
     void process()
     {
         for (int i = 1; i <= n; ++i)
