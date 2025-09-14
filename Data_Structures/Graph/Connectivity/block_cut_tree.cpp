@@ -26,6 +26,8 @@ struct BCT
                         bct[u].push_back(n + bccs);
                         while (st.size())
                         {
+                            if (st.back() != u)
+                                bct[st.back()].push_back(n + bccs);
                             bct[n + bccs].push_back(st.back());
                             st.pop_back();
                             if (bct[n + bccs].back() == v)
