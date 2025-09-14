@@ -18,9 +18,9 @@ struct BCT
         comp.push_back(c);
     }
 
-    void build(vvi& a, int _n)
+    void build(vvi& a)
     {
-        n = _n;
+        n = a.size() - 1;
         vt.resize(n + 1);
         function<void(int, int)> dfs = [&](int u, int p = -1)
         {
