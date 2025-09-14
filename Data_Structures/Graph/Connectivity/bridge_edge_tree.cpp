@@ -2,18 +2,14 @@ struct BET
 {
     vector<int> disc, low, comp, ins, id;
     stack<int>  st;
-
     vvi bet;
     int n, time = 0, cmp = 0;
-
     /// edge : {to, id}. id is when we get input
-    void build(vvi& a, vpii& edges, int _n)
+    void build(vvi& a, vpii& ed, int _n)
     {
         n = _n;
-        disc.resize(n + 1);
-        low.resize(n + 1);
-        comp.resize(n + 1);
-        ins.resize(n + 1);
+        disc.resize(n + 1), low.resize(n + 1);
+        comp.resize(n + 1), ins.resize(n + 1);
         id.resize(n + 1);
         function<void(int, int)> dfs = [&](int u, int p = -1)
         {
@@ -50,11 +46,11 @@ struct BET
                 dfs(i, -1);
 
         bet.resize(cmp + 1);
-        for (int i = 0; i < edges.size(); ++i)
-            if (id[edges[i].first] != id[edges[i].second])
+        for (auto e : ed)
+            if (id[e.first] != id[e.second])
             {
-                bet[id[edges[i].first]].push_back(id[edges[i].second]);
-                bet[id[edges[i].second]].push_back(id[edges[i].first]);
+                bct[id[e.first]].push_back(id[e.second]);
+                bct[id[e.second]].push_back(id[e.first]);
             }
     }
 };
