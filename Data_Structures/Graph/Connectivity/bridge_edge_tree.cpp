@@ -1,65 +1,60 @@
 struct BET
 {
-    struct Node
-    { int disc = 0, low = 0; };
-    vector<Node> vt;
-    vvi          bet;
-    vi           comp, bridge;
-    int          n, time = 0;
+    vector<int> disc, low, comp, ins, id;
+    stack<int>  st;
+
+    vvi bet;
+    int n, time = 0, cmp = 0;
 
     /// edge : {to, id}. id is when we get input
-    void build(vvpii& a, vpii& edges, int _n)
+    void build(vvi& a, vpii& edges, int _n)
     {
         n = _n;
-        vt.resize(n + 1);
-        comp.assign(n + 1, -1);
-        bridge.resize(edges.size());
-        function<void(int, int)> dfs = [&](int u, int eid = -1)
+        disc.resize(n + 1);
+        low.resize(n + 1);
+        comp.resize(n + 1);
+        ins.resize(n + 1);
+        id.resize(n + 1);
+        function<void(int, int)> dfs = [&](int u, int p = -1)
         {
-            vt[u].disc = vt[u].low = ++time;
-            int child              = 0;
-            for (auto [v, id] : a[u])
+            disc[u] = low[u] = ++time;
+            ins[u]           = 1;
+            st.push(u);
+            for (auto v : a[u])
             {
-                if (id == eid) continue;
-                if (!vt[v].disc)
+                if (v == p) continue;
+                if (!disc[v])
                 {
-                    dfs(v, id);
-
-                    if (vt[u].disc < vt[v].low)
-                        bridge[id] = 1;
-                    vt[u].low = min(vt[u].low, vt[v].low);
+                    dfs(v, u);
+                    low[u] = min(low[u], low[v]);
                 }
-                else vt[u].low = min(vt[u].low, vt[v].disc);
+                else if (ins[v])
+                    low[u] = min(low[u], disc[v]);
+            }
+            if (low[u] == disc[u])
+            {
+                cmp++;
+                while (st.size())
+                {
+                    int v = st.top();
+                    st.pop();
+                    ins[v] = 0;
+                    id[v]  = cmp;
+                    if (v == u)
+                        break;
+                }
             }
         };
         for (int i = 1; i <= n; ++i)
-            if (!vt[i].disc)
+            if (!disc[i])
                 dfs(i, -1);
 
-        int cid = 0;
-
-        function<void(int)> dfsc = [&](int u)
-        {
-            comp[u] = cid;
-            for (auto [v, id] : a[u])
-            {
-                if (comp[v] != -1) continue;
-                if (bridge[id]) continue;  // bỏ qua cầu
-                dfsc(v);
-            }
-        };
-        for (int i = 1; i <= n; ++i)
-            if (comp[i] == -1)
-            {
-                dfsc(i);
-                cid++;
-            }
-        bet.resize(cid + 1);
+        bet.resize(cmp + 1);
         for (int i = 0; i < edges.size(); ++i)
-            if (bridge[i])
+            if (id[edges[i].first] != id[edges[i].second])
             {
-                int a = comp[edges[i].first], b = comp[edges[i].second];
-                bet[a].push_back(b), bet[b].push_back(a);
+                bet[id[edges[i].first]].push_back(id[edges[i].second]);
+                bet[id[edges[i].second]].push_back(id[edges[i].first]);
             }
     }
 };
