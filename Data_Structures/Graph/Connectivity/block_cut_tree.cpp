@@ -22,7 +22,7 @@ struct BCT
                     low[u] = min(low[u], low[v]);
                     if (low[v] >= disc[u])
                     {
-                        bct.push_back({});
+                        bct.emplace_back({});
                         bct[u].push_back(n + bccs);
                         while (st.size())
                         {
