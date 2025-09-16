@@ -1,4 +1,4 @@
-/*
+
 ll nCk(ll n, ll k, ll mod)
 {
     if (n -k < k) swap(k, n-k);
@@ -290,4 +290,4 @@ struct DSU
     {
         iota(parent.begin(), parent.end(), 0);
     }
-}; */
+}; 
