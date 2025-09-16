@@ -5,7 +5,7 @@ struct BET
     vvi bet;
     int n, time = 0, cmp = 0;
     /// edge : {to, id}. id is when we get input
-    void build(vvi& a, vpii& ed)
+    void build(vvi& a)
     {
         n = a.size()-1;
         disc.resize(n + 1), low.resize(n + 1);
@@ -43,11 +43,12 @@ struct BET
             if (!disc[i])  dfs(i, -1);
 
         bet.resize(cmp + 1);
-        for (auto e : ed) // store edge id
-            if (id[e.first] != id[e.second])
-            {
-                bet[id[e.first]].push_back(id[e.second]);
-                bet[id[e.second]].push_back(id[e.first]);
-            }
+        for (int u = 1; u <= n; ++u)
+            for (int v : a[u]) 
+                if (id[u] != id[v])
+                {
+                    bet[id[u]].push_back(id[v]);
+                    bet[id[v]].push_back(id[u]);
+                }
     }
 };
