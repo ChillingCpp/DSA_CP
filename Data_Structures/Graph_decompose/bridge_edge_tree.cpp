@@ -35,14 +35,12 @@ struct BET
                     st.pop();
                     ins[v] = 0;
                     id[v]  = cmp;
-                    if (v == u)
-                        break;
+                    if (v == u)  break;
                 }
             }
         };
         for (int i = 1; i <= n; ++i)
-            if (!disc[i])
-                dfs(i, -1);
+            if (!disc[i])  dfs(i, -1);
 
         bet.resize(cmp + 1);
         for (auto e : ed) // store edge id
