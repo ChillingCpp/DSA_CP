@@ -1,5 +1,3 @@
-
-
 vector<int> a;
 vector<int> idx;
 iota(idx.begin, idx.end(), 0);
