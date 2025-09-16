@@ -46,7 +46,7 @@ struct BET
                 dfs(i, -1);
 
         bet.resize(cmp + 1);
-        for (auto e : ed)
+        for (auto e : ed) // store edge id
             if (id[e.first] != id[e.second])
             {
                 bet[id[e.first]].push_back(id[e.second]);
