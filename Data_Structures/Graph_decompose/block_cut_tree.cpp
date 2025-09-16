@@ -24,14 +24,14 @@ struct BCT
                     {
                         bct.emplace_back({});
                         bct[u].push_back(n + bccs);
+                        bct[n + bccs].push_back(u);
                         while (st.size())
                         {
-                            if (st.back() != u)
-                                bct[st.back()].push_back(n + bccs);
-                            bct[n + bccs].push_back(st.back());
+                            int x = st.back();
                             st.pop_back();
-                            if (bct[n + bccs].back() == v)
-                                break;
+                            bct[x].push_back(n + bccs);
+                            bct[n + bccs].push_back(x);
+                            if (x == v) break;
                         }
                         bccs++;
                     }
