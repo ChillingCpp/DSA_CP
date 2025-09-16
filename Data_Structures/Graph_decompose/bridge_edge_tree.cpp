@@ -1,6 +1,6 @@
 struct BET
 {
-    vector<int> disc, low, comp, ins, id;
+    vector<int> disc, low, ins, id;
     stack<int>  st;
     vvi bet;
     int n, time = 0, cmp = 0;
@@ -9,8 +9,7 @@ struct BET
     {
         n = a.size()-1;
         disc.resize(n + 1), low.resize(n + 1);
-        comp.resize(n + 1), ins.resize(n + 1);
-        id.resize(n + 1);
+        ins.resize(n + 1), id.resize(n + 1);
         function<void(int, int)> dfs = [&](int u, int p = -1)
         {
             disc[u] = low[u] = ++time;
