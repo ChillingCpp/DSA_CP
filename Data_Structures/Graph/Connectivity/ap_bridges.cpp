@@ -2,7 +2,7 @@ struct Tarjan
 {
     struct Bridge
     { int u = 0, v = 0;  };
-    vvi            a, sccs;
+    vvi            a;
     vector<int>    disc, low, ap;
     vector<Bridge> bridge;
     int            n, t = 0;
