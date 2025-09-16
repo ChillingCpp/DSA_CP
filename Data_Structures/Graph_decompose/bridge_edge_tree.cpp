@@ -49,8 +49,8 @@ struct BET
         for (auto e : ed)
             if (id[e.first] != id[e.second])
             {
-                bct[id[e.first]].push_back(id[e.second]);
-                bct[id[e.second]].push_back(id[e.first]);
+                bet[id[e.first]].push_back(id[e.second]);
+                bet[id[e.second]].push_back(id[e.first]);
             }
     }
 };
