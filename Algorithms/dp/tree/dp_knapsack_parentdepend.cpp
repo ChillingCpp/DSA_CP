@@ -6,7 +6,7 @@
 /// The goal is to maximize total profit.
 
 vi p, wt, pr; // 1 based index // weight at u and profit at u
-vvi a, kn; // dp and graph
+vvi a, kn; // dp and graph, assign kn all by -1, kn[o][0] = 0, result is max(kn[0][i]) for all 1 <= i <= W
 ll n, W; // total cost
 
 void dfs1(int u, int pp = 0)
