@@ -14,7 +14,8 @@ struct BCT
             st.push_back(u);
             for (int v : a[u])
             {
-                if (v == p)  continue;
+                if (v == p)  
+                    continue;
                 if (!disc[v])
                 {
                     dfs(v, u);
