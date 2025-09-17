@@ -6,7 +6,7 @@ inline ll hilbert_order(int x, int y, int pow)
 
     for (int p = pow; p > 0; --p)
     {
-        int hp  = 1 << (p - 1);
+        int hp  = 1 << (p - 1); // high to low
         
         int seg = (x < hp ? 1 : 0) ^ (y < hp ? 1 : 2);
         
@@ -18,20 +18,15 @@ inline ll hilbert_order(int x, int y, int pow)
         switch (seg)
         {
             case 0:
-                x = ny;
-                y = nx;
+                x = ny, y = nx;
                 break;
             case 3:
-                x = hp - ny - 1;
-                y = hp - nx - 1;
+                x = hp - ny - 1, y = hp - nx - 1;
                 break;
             default:
-                x = nx;
-                y = ny;
+                x = nx, y = ny;
                 break;
         }
     }
     return res;
-
 }
-
