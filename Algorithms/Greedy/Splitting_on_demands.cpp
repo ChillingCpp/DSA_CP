@@ -1,5 +1,10 @@
 // examples : CF 309C
 
+
+// tư tưởng như sau : các vị trí i có thể phân rã cho các vị trí j < i, và từ tư tưởng đó thì tốt nhất ta nên lan truyền xuống j nếu j không đủ
+// mỗi lần truyền thì có thể vị trí j sẽ luôn được >= i, vậy nên tham lam hoạt động tốt trong trường hợp này.
+/// duyệt iter 2 lần hoặc n lần đảm bảo được lan truyền hoàn toàn.
+
 int main()
 {
     fastio;
