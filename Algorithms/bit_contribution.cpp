@@ -12,4 +12,8 @@ vector<vector<int>> a(30, vector<int>(n));
 for (int bit = bitsize; bit >= 0; --bit)
 {
     /// do something in here, calculate
+    for (int i = 0; i < n; ++i)
+    {
+        
+    }
 }
