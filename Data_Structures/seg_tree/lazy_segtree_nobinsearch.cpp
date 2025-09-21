@@ -93,10 +93,12 @@ public:
         if (l == r)
             return id_node();
 
+        l += size;
+        r += size;
         push(l, r);
 
         Node ans = id_node();
-        for (l += size, r += size; l < r; l >>= 1, r >>= 1)
+        for (; l < r; l >>= 1, r >>= 1)
         {
             if (l & 1)
                 ans = op(ans, d[l++]);
