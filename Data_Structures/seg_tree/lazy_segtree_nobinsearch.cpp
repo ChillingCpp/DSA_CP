@@ -1,28 +1,15 @@
 struct Node
     {
-        long long sum;
-        int       len;
-        Node(long long s, int sz)
-        : sum(s)
-        , len(sz)
-        {}
+        ll sum = 0, len = 1;
     };
     struct Lazy
     {
-        bool      has_set;
-        long long val;
-        Lazy(bool hs, long long v)
-        : has_set(hs)
-        , val(v)
-        {}
+        bool      has_set = 0;
+        ll val = 0;
     };
     Node op(Node a, Node b)
     {
         return Node(a.sum + b.sum, a.len + b.len);
-    }
-    Node in()
-    {
-        return {0, 0};
     }
     Node transfer(Lazy f, Node node)
     {
@@ -44,6 +31,10 @@ struct Node
             else
                 return Lazy(false, prev.val + nw.val);
         }
+    }
+    Node idn()
+    {
+        return {0, 0};
     }
     Lazy idl()
     {
@@ -102,7 +93,7 @@ struct Seg
     void apply_all(int p, Lazy val)
     {
         st[p] = transfer(st[p], val);
-        if (p < n) lazy[p] = op_l(lazy[p], val);
+        if (p < n) lazy[p] = op_l(val, lazy[p]);
     }
     void push(int p)
     {
