@@ -30,6 +30,3 @@ $$\omega(n) = k $$
 * Đếm số ước (phổ biến trong bài toán “divisor counting”)
 * Tối ưu chọn số có nhiều thừa số nhất
 * Phân tích nhanh độ dài chuỗi chia thừa số
-
-
-👉 Nếu bạn muốn, tôi có thể biên soạn những công thức này thành **1 “cheat sheet” ngắn gọn PDF** để bạn dùng khi luyện thi ICPC/Codeforces. Bạn có muốn tôi tạo file đó không? 📄✨
