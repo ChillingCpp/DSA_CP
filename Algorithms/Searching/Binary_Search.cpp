@@ -14,7 +14,7 @@ while (low <= high)
 {
     ll mid = (low + high) / 2;
     if (check(mid))
-        high = mid - 1; // or  low= mid + 1
+        high = mid - 1; // or low = mid + 1
     else
         low = mid + 1; // or high = mid -1;
 }
@@ -32,8 +32,8 @@ while (iter--)
 {
     ll mid = (low + high) / 2;
     if (check(mid))
-        low = mid;
+        low = mid; // or high = mid
     else
-        high = mid;
+        high = mid; // or low = mid;
 }
-cout << low << '\n';
+cout << (low + high) /2 << '\n';
