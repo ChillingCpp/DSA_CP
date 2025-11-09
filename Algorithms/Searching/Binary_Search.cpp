@@ -27,7 +27,7 @@ bool check(double mid)
   
 }
 double low = 0, high = 1e10, eps = 1e-7;
-int iter = int(log2((r - l)/ eps))+ 3;
+int iter = int(log2((high - low)/ eps))+ 3;
 while (iter--)
 {
     ll mid = (low + high) / 2;
