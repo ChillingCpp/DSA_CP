@@ -2,7 +2,7 @@
 ## 1. Understand the problem - hiểu vấn đề
 
 
-> _What is the unknown? What are the data? What are the conditions?_
+### _What is the unknown? What are the data? What are the conditions?_
 
 Trong DP, điều này tương đương:
 
@@ -15,7 +15,7 @@ Trong DP, điều này tương đương:
 	- Phát biểu lại các điều kiện theo toán học
 ## 2. Devising a plan - lập kế hoạch
 
-> _Liên hệ giữa dữ liệu và ấn số_ 
+### _Liên hệ giữa dữ liệu và ấn số_ 
 
 - Biến đổi dữ liệu đã có thành 1 hướng xác định để dễ tiếp cận
 	- sort, map, compress, prefix, suffix, block, subsequence, tree....
@@ -38,7 +38,7 @@ Trong DP, điều này tương đương:
     
 👉 **Thông tin cần nhớ = mầm mống của state**
 
-> _Nếu chưa có tiến triển_
+### _Nếu chưa có tiến triển_
 
 -  Tìm một hướng khác dễ tiếp cận hơn
 	- Suy nghĩ ngược lại
@@ -52,7 +52,7 @@ Trong DP, điều này tương đương:
 	
 ## 3. Carry out the plan
 
-> Chú ý : đây có thể là vòng lặp
+### Chú ý : đây có thể là vòng lặp
 
 - Xác định hướng đi của bài  toán :
 	- Chiều thuận
@@ -70,13 +70,11 @@ Trong DP, điều này tương đương:
 - Kiểm tra lại công thức
 	- Chứng minh mỗi bước không trùng/thiếu state
 
-> nếu 1 trong 4 bước bị fail, quay về bước đầu tiên
+### nếu 1 trong 5 bước bị fail, quay về bước đầu tiên
 
 ## 4. Look back - nhìn lại bài toán
 
-Polya hỏi:
-
-> _Can you derive the result differently? Can you improve it?_
+### _Can you derive the result differently? Can you improve it?_
 
 Trong DP:
 
