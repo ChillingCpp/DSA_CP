@@ -70,7 +70,7 @@ Trong DP, điều này tương đương:
 - Kiểm tra lại công thức
 	- Chứng minh mỗi bước không trùng/thiếu state
 
-### nếu 1 trong 5 bước bị fail, quay về bước đầu tiên
+### Nếu 1 trong 5 bước bị fail, quay về bước đầu tiên
 
 ## 4. Look back - nhìn lại bài toán
 
