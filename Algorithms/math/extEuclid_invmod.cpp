@@ -9,7 +9,8 @@ ll euclid(ll a, ll b, ll &x, ll &y)
     ll x1, y1;
     ll d = euclid(b, a % b, x1, y1);
     x = y1;
-    y = x1 - y1 * (a / b); 
+    y = x1 - y1 * (a / b);
+    return d;
 }
 
 ll invmod(ll a, ll m){
@@ -38,4 +39,5 @@ vector<ll> invmod(vector<ll> a, ll b, ll m)
     return inv;
 
 }
+
 
