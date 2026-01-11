@@ -85,20 +85,20 @@ struct Seg
         int  l1 = l, r1 = r;
         for (; l < r; l >>= 1, r >>= 1)
         {
-            if (l & 1)  apply_all(l++, val);
-            if (r & 1)  apply_all(--r, val);
+            if (l & 1)  apply_lazy(l++, val);
+            if (r & 1)  apply_lazy(--r, val);
         }
         update(l1, r1);
     }
-    void apply_all(int p, Lazy val)
+    void apply_lazy(int p, Lazy val)
     {
         st[p] = transfer(st[p], val);
         if (p < n) lazy[p] = op_l(val, lazy[p]);
     }
     void push(int p)
     {
-        apply_all(p << 1, lazy[p]);
-        apply_all(p << 1 | 1, lazy[p]);
+        apply_lazy(p << 1, lazy[p]);
+        apply_lazy(p << 1 | 1, lazy[p]);
         lazy[p] = idl();
     }
     void update(int p)
