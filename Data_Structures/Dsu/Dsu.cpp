@@ -37,9 +37,9 @@ struct Dsu
     }
     bool unite(int x, int y)
     {
-        int rx = find(x);
-        int ry = find(y);
-        if (rx == ry)
+        x = find(x);
+        y = find(y);
+        if (x == y)
             return false;
 
         if (sz[x] < sz[y])
