@@ -18,7 +18,7 @@ ll ternary()
             high = m2;
 
         // finding min
-        if (f(m1) > f(m2))
+        if (f(m1) < f(m2))
             high = m2;
         else
             low = m1;
@@ -52,7 +52,7 @@ double ternary()
             high = m2;
 
         // finding min
-        if (f(m1) > f(m2))
+        if (f(m1) < f(m2))
             high = m2;
         else
             low = m1;
