@@ -298,7 +298,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 60. Pashmak and Flowers (Codeforces) ( done )
     
-61. Duff and Meat (Codeforces)
+61. Duff and Meat (Codeforces) ( done )
     
 62. Wilbur and Array (Codeforces)
     
