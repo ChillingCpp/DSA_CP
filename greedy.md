@@ -286,17 +286,17 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
 
 ## 4. Exchange Argument & Sorting Criteria
 
-55. Kuroni and the Gifts (Codeforces)
+55. Kuroni and the Gifts (Codeforces) ( done )
     
-56. Diluc and Kaeya (Codeforces)
+56. Diluc and Kaeya (Codeforces) ( done )
     
-57. Bad Sequence (Codeforces)
+57. Bad Sequence (Codeforces) ( done )
     
-58. Equalize the Array (Codeforces)
+58. Equalize the Array (Codeforces) ( done )
     
-59. String Game (Codeforces)
+59. String Game (Codeforces) ( done )
     
-60. Pashmak and Flowers (Codeforces)
+60. Pashmak and Flowers (Codeforces) ( done )
     
 61. Duff and Meat (Codeforces)
     
