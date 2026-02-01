@@ -309,6 +309,23 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
 77. Pokemon Army (Hard Version) (Codeforces)
     
 78. Product 1 Modulo N (Codeforces)
+
+- Codeforces 1203F2 - Complete the Projects (hard version) (Codeforces)
+- Codeforces 1151D - Stas and the Queue (Codeforces)
+- Codeforces 1324D - Pair of Topics (Codeforces)
+- Codeforces 1551C - Interesting Story (Codeforces)
+- Codeforces 1526C2 - Potions (Hard Version) (Codeforces)
+- Codeforces 1472E - Correct Placement (Codeforces)
+- Codeforces 1251C - Minimize The Integer (Codeforces)
+- Codeforces 1690E - Price Maximization (Codeforces)
+- Codeforces 1520E - Arranging The Sheep (Codeforces)
+- Codeforces 1499C - Minimum Grid Path (Codeforces)
+- Codeforces 1607D - Blue-Red Permutation (Codeforces)
+- Codeforces 1419D2 - Sage's Birthday (hard version) (Codeforces)
+- Codeforces 1296E2 - String Coloring (hard version) (Codeforces)
+- Codeforces 1288C - Two Arrays (Codeforces)
+- Codeforces 1703F - Yet Another Problem About Pairs Satisfying an Inequality (Codeforces)
+
     
 
 ---
