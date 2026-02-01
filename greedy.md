@@ -300,7 +300,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 61. Duff and Meat (Codeforces) ( done )
     
-62. Wilbur and Array (Codeforces)
+62. Wilbur and Array (Codeforces) ( done )
     
 63. Watering System (Codeforces)
     
