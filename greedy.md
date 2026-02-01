@@ -296,9 +296,9 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 62. Wilbur and Array (Codeforces) ( done )
     
-72. Minimum Ties (Codeforces)
+72. Minimum Ties (Codeforces) ( done )
     
-73. The Smallest String Concatenation (Codeforces)
+73. The Smallest String Concatenation (Codeforces) ( done )
     
 74. Monster (AtCoder) ( dont know, may be 3000 on clist )
     
