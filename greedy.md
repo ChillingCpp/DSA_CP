@@ -13,8 +13,6 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
 
 ## I. Codeforces
 
-### A. Core / Hard problems
-
 1. Potions (Hard Version) (done)
     
 2. Buy Low Sell High (hard)
@@ -68,7 +66,6 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
 26. **Zero Tree** (274B)
     
 
-### B. Medium / Greedy classics
 
 27. Productive Meeting
     
@@ -90,8 +87,6 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 36. Helping the Nature
     
-
-### C. Mixed / Additional Codeforces set
 
 37. Codeforces 3D – Least Cost Bracket Sequence
     
@@ -199,8 +194,6 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
 16. Array of Doubled Pairs (954)
     
 
----
-
 ## III. AtCoder
 
 1. Sequence Decomposing (ABC 134 E)
@@ -240,6 +233,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 4. Stick Divisions (CSES)
 ---
+
 
 ## 3. Greedy + Set / Multiset / Map
 
@@ -302,29 +296,11 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 62. Wilbur and Array (Codeforces) ( done )
     
-63. Watering System (Codeforces)
-    
-64. The King's Race (Codeforces)
-    
-65. Sort the Array (Codeforces)
-    
-66. Ilya and Queries (Codeforces)
-    
-67. Phoenix and Puzzle (Codeforces)
-    
-68. Mere Array (Codeforces)
-    
-69. City Savers (AtCoder)
-    
-70. Divide the Problems (AtCoder)
-    
-71. Attack Survival (AtCoder)
-    
 72. Minimum Ties (Codeforces)
     
 73. The Smallest String Concatenation (Codeforces)
     
-74. Monster (AtCoder)
+74. Monster (AtCoder) ( dont know, may be 3000 on clist )
     
 75. Choosing Flowers (Codeforces)
     
