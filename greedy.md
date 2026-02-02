@@ -27,7 +27,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 7. **Exam in BerSU (Hard Version)** (1185C2) ( done, dùng 2 heaps, nếu t_i * n <= 1e8 thì có thể dùng mảng tần số )
     
-8. **Least Prefix Sum** (1779C)
+8. **Least Prefix Sum** (1779C) ( done )
     
 9. **Voting** (1251E)
     
