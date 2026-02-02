@@ -25,7 +25,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 6. Decreasing Debts (B1/B2)
     
-7. **Exam in BerSU (Hard Version)** (1185C2)
+7. **Exam in BerSU (Hard Version)** (1185C2) ( done )
     
 8. **Least Prefix Sum** (1779C)
     
