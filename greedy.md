@@ -33,7 +33,7 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 10. **MEX and Increments** (1619E)
     
-11. **Planning** (853A)
+11. **Planning** (853A) ( done )
     
 12. **Sonya and Problem Without a Legend** (713C)
     
