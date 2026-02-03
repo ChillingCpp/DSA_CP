@@ -31,27 +31,23 @@ Tôi **không đảm bảo 100% mọi bài đều được xếp đúng tuyệt 
     
 9. **Voting** (1251E)
     
-10. **MEX and Increments** (1619E)
-    
+10. **MEX and Increments** (1619E) ( done )
+     
 11. **Planning** (853A) ( done )
     
 12. **Sonya and Problem Without a Legend** (713C)
     
-13. **Sequence** (13C)
+13. **Sequence** (13C) ( tương tự 713C nhưng là dãy không giảm )
     
 14. **April Fools' Problem (medium)** (802N)
     
-15. **Compression and Expansion** (1523C)
+17. **Pasha and Branch Assignment** (765E) ( hard )
     
-16. **Decreasing Debts** (1254B2)
+18. **Make It Equal** (1065C)  ( done )
     
-17. **Pasha and Branch Assignment** (765E)
+19. **Lazy Student** (603A) ( hard )
     
-18. **Make It Equal** (1065C)
-    
-19. **Lazy Student** (603A)
-    
-20. **Heap Operations** (681C)
+20. **Heap Operations** (681C) ( heap )
     
 21. **Cow and Fields** (1307D)
     
