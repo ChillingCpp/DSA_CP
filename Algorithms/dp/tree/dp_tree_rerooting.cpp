@@ -3,7 +3,9 @@ struct Rerooting
     vector<vector<int>> a;
     vector<ll>          dp, result;
     vector<int>         sz;  // size of subtree, may needed in some problems
+    struct State{
 
+    };
     Rerooting(vector<vector<int>>& a)
     : a(a)
     , dp(a.size())
@@ -11,13 +13,15 @@ struct Rerooting
     , sz(a.size())
     {
     }
-    // include / exclude subtree of v to u.
 
-    void include(int u, int v)
-    {
+    void process(int u, int v){
+
     }
-    void exclude(int u, int v)
-    {
+    State backup(int u){
+
+    }
+    void rollback(int u, State& s){
+
     }
     void dfs(int u = 1, int p = 1)
     {
@@ -29,7 +33,7 @@ struct Rerooting
             if (v == p)
                 continue;
             dfs(v, u);
-            include(u, v);
+            process(u, v);
         }
     }
     void rerooting(int u, int p)
