@@ -44,17 +44,13 @@ struct Rerooting
             if (v == p)
                 continue;
 
-            /// change root u to node v
-            exclude(u, v);
-            include(v, u);
-
-
+            auto su = backup(u);
+            auto sv = backup(v);
+            process(v, u);
             rerooting(v, u);
 
-
-            /// restore root
-            exclude(v, u);
-            include(u, v);
+            rollback(u, su);
+            rollback(v, sv);
         }
     }
 };
