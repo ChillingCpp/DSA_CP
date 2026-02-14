@@ -14,8 +14,7 @@ void input()
         in[v]++;
     }
 }
-struct Solve
-{
+
     void solve()
     {
         priority_queue<int, vector<int>, greater<int>> pq;
@@ -41,5 +40,5 @@ struct Solve
         else
             cout << ans << '\n';
     }
-};
+
 
