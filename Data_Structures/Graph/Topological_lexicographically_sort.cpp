@@ -37,7 +37,7 @@ struct Solve
             }
         }
         if (ans.size() != n)
-            cout << "Sandro fails.";
+            cout << "found a cycle";
         else
             cout << ans << '\n';
     }
