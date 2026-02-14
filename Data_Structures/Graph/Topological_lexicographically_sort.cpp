@@ -14,31 +14,27 @@ void input()
         in[v]++;
     }
 }
-
-    void solve()
+void solve()
+{
+    priority_queue<int, vector<int>, greater<int>> pq;
+    for (int i = 1; i <= n; ++i)
+        if (in[i] == 0)
+            pq.push(i);
+    vector<int> ans;
+    while (pq.size())
     {
-        priority_queue<int, vector<int>, greater<int>> pq;
-        for (int i = 1; i <= n; ++i)
-            if (in[i] == 0)
-                pq.push(i);
-
-        vector<int> ans;
-        while (pq.size())
+        int u = pq.top();
+        pq.pop();
+        ans.push_back(u);
+        for (auto v : a[u])
         {
-            int u = pq.top();
-            pq.pop();
-            ans.push_back(u);
-            for (auto v : a[u])
-            {
-                in[v]--;
-                if (in[v] == 0)
-                    pq.push(v);
-            }
+            in[v]--;
+            if (in[v] == 0)
+                pq.push(v);
         }
-        if (ans.size() != n)
-            cout << "found a cycle";
-        else
-            cout << ans << '\n';
     }
-
-
+    if (ans.size() != n)
+        cout << "Sandro fails.";
+    else
+        cout << ans << '\n';
+}
