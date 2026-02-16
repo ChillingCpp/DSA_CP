@@ -66,67 +66,7 @@ struct Trie
             cout << '\n';
         }
     }
-    Trie& operator+=(const Trie& other)
-    {
-        merge(other);
-        return *this;
-    }
-    Trie operator+(const Trie& other)
-    {
-        Trie& res = *this;
-        res += other;
-        return res;
-    }
-
 private:
-    void merge(const Trie& other)
-    {
-        if (other.t.size() == 1)
-            return;
-        mergehelper(0, 0, other);
-    }
-    void mergehelper(int i1, int i2, const Trie& other)
-    {
-        if (other.t[i2].end)
-        {
-            t[i1].end = true;
-            t[i1].cnt += other.t[i2].cnt;
-        }
-        for (int i = 0; i < 26; ++i)
-        {
-            int  i4 = other.t[i2].nxt[i];
-            int& i3 = t[i1].nxt[i];
-            if (!i4)
-                continue;
-            if (!t[i1].nxt[i])
-            {
-                i3 = t.size();
-                copybranch(i4, other);
-            }
-            else
-                mergehelper(i3, i4, other);
-        }
-    }
-    void copybranch(int i2, const Trie& other)
-    {
-        // Create new node
-        int i1 = t.size();
-        t.emplace_back();
-
-        // Copy node properties
-        t[i1].end = other.t[i2].end;
-        t[i1].cnt = other.t[i2].cnt;
-
-        // Recursively copy children
-        for (int i = 0; i < 26; i++)
-        {
-            if (other.t[i2].nxt[i])
-            {
-                t[i1].nxt[i] = t.size();
-                copybranch(other.t[i2].nxt[i], other);
-            }
-        }
-    }
 };
 
 // cannot combine with aho-corasick
