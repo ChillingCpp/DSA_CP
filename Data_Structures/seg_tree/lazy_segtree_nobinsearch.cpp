@@ -11,7 +11,7 @@ struct Node
     {
         return Node(a.sum + b.sum, a.len + b.len);
     }
-    Node transfer(Lazy f, Node node)
+    Node tf(Lazy f, Node node)
     {
         if (node.len == 0)
             return node;
@@ -94,7 +94,7 @@ struct Seg
     }
     void apply_l(int p, Lazy val)
     {
-        st[p] = transfer(st[p], val);
+        st[p] = tf(st[p], val);
         if (p < n) lazy[p] = op_l(val, lazy[p]);
     }
     void push(int p)
