@@ -40,6 +40,8 @@ struct Node
     {
         return {0, 0};
     }
+
+// Quy ước : node có chỉ số càng nhỏ thì càng gần root, node có chỉ số 1 là root
 struct Seg
 {
     vector<Node> st;
