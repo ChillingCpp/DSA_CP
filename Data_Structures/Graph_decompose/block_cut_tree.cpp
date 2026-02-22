@@ -3,6 +3,7 @@
         int         n, bccs = 1, time = 0;
         vvi         bct;
         vector<int> st, low, disc;
+        // st : Stack chứa các đỉnh trên đường DFS hiện tại và những đỉnh chưa được gán BCC
 
         void build(vvi& a)
         {
@@ -32,7 +33,7 @@
                                     st.pop_back();
                                     bct[x].push_back(n + bccs);
                                     bct[n + bccs].push_back(x);
-                                    if (x == v)
+                                    if (x == v) // phải chọn mốc kết thúc là v, nếu chọn u thì có thể sẽ bị lấy toàn bộ các subtree con u
                                         break;
                                 }
                                 bccs++;
