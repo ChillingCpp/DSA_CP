@@ -1,76 +1,69 @@
-struct Binlift
+struct DP
 {
-    /// we can using the up table to store more information, generalize its into a struct contain more information about the 2^i ancestor, and path to u
-    /// dp + binary lifting, store idempoetence
-    vector<vector<int>> a, up; 
-    vector<int>         st, en, depth; // binlift for Mo algorithm need st and en array
-    int                 n, lg, timer;
-
-    Binlift(vector<vector<int>>& adj, int root = 1)
-    : a(adj)
-    , n(a.size())
-    , timer(0)
-    {
-        lg = __lg(n) + 1;
-        st.resize(n), en.resize(n), depth.resize(n);
-    
-        up.resize(n, vector<int>(lg));
-        up[root][0] = root;
-        depth[root] = 0;
-        dfs(root, root);  // if root is 1
-    }
-    
-    bool is_ances(int u, int v)
-    {
-        return st[u] <= st[v] && en[v] <= en[u];
-    }
-    int jump(int u, int k)
-    {
-        for (int i = 0; (1 << i) <= k; ++i)
-        {
-            if ((1 << i) & k)
-                u = up[u][i];
-        }
-        return u;
-    }
-    void dfs(int u, int p, int h = 0)
-    {
-        st[u]    = ++timer;
-        
-        up[u][0] = p;
-        for (int i = 1; i < lg; ++i)
-            up[u][i] = up[up[u][i - 1]][i - 1];
-
-        for (int v : a[u]){
-            if (v == p) continue;
-            depth[v] = depth[u]+1;
-            dfs(v, u, h + 1);
-            
-        }
-
-        en[u] = ++timer;
-    }
-    int lca(int u, int v)
-    {
-        if (is_ances(u, v))
-            return u;
-        if (is_ances(v, u))
-            return v;
-
-        for (int i = lg - 1; i >= 0; --i)
-            if (!is_ances(up[u][i], v))
-                u = up[u][i];
-
-        return up[u][0];
-    }
+    ll nodeVal;
+    ll edgeVal;
 };
 
+const int MAXN = 200005;
+const int LOG  = 20;
 
-/// construct binary lifting algorithm :
-/// construct up[n][i] table, up table can store more information about the 2^i ancestor
-/// st[i], en[i] record the first occur/last seen in euler tour of node i
-/// up[v][i] = up[up[v][i - 1][i - 1]];
-/// is_ances(u, v) : check u is ancestor of v : st[u] <= st[v] && en[u] >= en[v];
-/// lca : first check u or v is ancestor, then lift u until u is ancestor of v, then return up[u][0] (parent of u) is the lca(u, v)
-///
+int         n;
+vector<pii> adj[MAXN];
+int depth[MAXN];
+int up[MAXN][LOG];
+ll  nodeValue[MAXN];
+DP dp[MAXN][LOG];
 
+ll opNode(ll a, ll b)
+{
+    return a + b;  // đổi nếu cần
+}
+ll opEdge(ll a, ll b)
+{
+    return a + b;  // đổi nếu cần
+}
+DP combine(DP a, DP b)
+{
+    DP res;
+    res.nodeVal = opNode(a.nodeVal, b.nodeVal);
+    res.edgeVal = opEdge(a.edgeVal, b.edgeVal);
+    return res;
+}
+void dfs(int u, int p = 0, ll w_to_p = 0)
+{
+    up[u][0] = p;
+    dp[u][0].nodeVal = nodeValue[u];
+    dp[u][0].edgeVal = w_to_p;
+    for (int k = 1; k < LOG; k++)
+    {
+        up[u][k] = up[up[u][k - 1]][k - 1];
+        dp[u][k] = combine(dp[u][k - 1], dp[up[u][k - 1]][k - 1]);
+    }
+    for (auto [v, w] : adj[u])
+        if (v != p)
+        {
+            depth[v] = depth[u] + 1;
+            dfs(v, u, w);
+        }
+}
+pair<int, DP> queryPath(int u, int v)
+{
+    DP ans = { 0, 0 };
+    if (depth[u] < depth[v])
+        swap(u, v);
+    int diff = depth[u] - depth[v];
+    for (int i = 0; (1 << i) <= diff; ++i)
+        if (diff & (1 << i))
+            ans = combine(ans, dp[u][i]), u = up[u][i];
+    if (u == v)
+    {
+        ans.nodeVal = opNode(ans.nodeVal, nodeValue[u]);  // thêm node lca
+        return { up[u][0], ans };
+    }
+    for (int k = LOG - 1; k >= 0; k--)
+        if (up[u][k] != up[v][k])
+            ans = combine(ans, combine(dp[u][k], dp[v][k])), u = up[u][k], v = up[v][k];
+    ans         = combine(ans, combine(dp[u][0], dp[v][0]));
+    ans.nodeVal = opNode(ans.nodeVal, nodeValue[up[u][0]]);
+    return { up[u][0], ans };
+}
