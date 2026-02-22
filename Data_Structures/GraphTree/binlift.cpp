@@ -58,7 +58,7 @@ pair<int, DP> queryPath(int u, int v)
     if (u == v)
     {
         ans.nodeVal = opNode(ans.nodeVal, nodeValue[u]);  // thêm node lca
-        return { up[u][0], ans };
+        return { u, ans };
     }
     for (int k = LOG - 1; k >= 0; k--)
         if (up[u][k] != up[v][k])
@@ -67,3 +67,4 @@ pair<int, DP> queryPath(int u, int v)
     ans.nodeVal = opNode(ans.nodeVal, nodeValue[up[u][0]]);
     return { up[u][0], ans };
 }
+
