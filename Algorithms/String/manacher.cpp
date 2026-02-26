@@ -1,4 +1,4 @@
-void manacherv2(string& s)
+void manacher(string& s)
 {
     int                 n = s.size();
     vector<vector<int>> p(2, vector<int>(n, 0));
