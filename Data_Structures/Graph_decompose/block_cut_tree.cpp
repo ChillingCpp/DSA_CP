@@ -2,7 +2,7 @@
     {
         int         n, bccs = 1, time = 0;
         vvi         bct;
-        vector<int> st, low, disc;
+        vector<int> st, low, disc, id;
         // st : Stack chứa các đỉnh trên đường DFS hiện tại và những đỉnh chưa được gán BCC
 
         void build(vvi& a)
@@ -11,6 +11,7 @@
             bct.resize(n + 1);
             low.resize(n + 1);
             disc.resize(n + 1);
+            id.resize(n+1);
             function<void(int, int)> dfs = [&](int u, int p = -1)
             {
                 low[u] = disc[u] = ++time;
@@ -31,8 +32,9 @@
                                 {
                                     int x = st.back();
                                     st.pop_back();
-                                    bct[x].push_back(n + bccs);
+                                    bct[x].push_back(n + bccs); /// if you dont want to connect all node then just comment 2 lines 
                                     bct[n + bccs].push_back(x);
+                                    id[x] = n+bccs; 
                                     if (x == v) // phải chọn mốc kết thúc là v, nếu chọn u thì có thể sẽ bị lấy toàn bộ các subtree con u
                                         break;
                                 }
