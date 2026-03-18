@@ -1,12 +1,16 @@
-
 #include "../seg_tree/seg_tree.cpp"
 
 struct HLD
 {
-    int          n, t = 0;
+    struct Edge
+    {    
+        int u, v, w;
+    };
+    int          n, q, t = 0;
     vi           sz, head, in, out, pr, d;
     vector<Node> eval, nval;
     vvpii        a;
+    vector<Edge> e;
 
     void dfs(int u, int p, int dd = 0, ll ww = 0)
     {
@@ -46,12 +50,31 @@ struct HLD
         }
         if (d[u] > d[v])
             swap(u, v);
-        res = combine(res, edge.query(in[u] + 1, in[v]));
+        res = combine(res, edge.query(in[u] + 1, in[v])); // not include lca
         res = combine(res, node.query(in[u], in[v]));
         return res;
     }
     void solve()
     {
+
+        cin >> n >> q;
+        val.resize(n + 1);
+        sz.resize(n + 1);
+        in.resize(n + 1);
+        head.resize(n + 1);
+        d.resize(n + 1);
+        out.resize(n + 1);
+        pr.resize(n + 1);
+        a.resize(n + 1);
+        
+        for (int i = 0; i < n - 1; ++i)
+        {
+            int x, y, w;
+            cin >> x >> y >> w;
+            a[x].push_back({ y, w });
+            a[y].push_back({ x, w });
+            e.push_back({ x, y, w });
+        }
         head[1] = 1;  // quan trọng
         dfs(1, 0);
         hld(1, 0);
@@ -60,7 +83,7 @@ struct HLD
             f[in[i]] = eval[i], f2[in[i]] = nval[i];
         Seg edge(f);
         Seg node(f2);
-        while (true)
+        for (int  i= 0; i < q; ++i)
         {
             int tp, i, c;
             cin >> tp >> i >> c;
