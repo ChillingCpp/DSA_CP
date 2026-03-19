@@ -12,6 +12,7 @@ for (int i = 2; i <= n + m; ++i)
     for (int j = 2; j <= n + m; ++j)
         ....
 
+//// query tâm (x0, y0) ban đầu với bán kính mahattan = k
 long long query_diamond(int x0, int y0, int k) {
     // mục tiêu : (x0, y0) -> (u1, v1) và (u2, v2)
     int u1 = max(2, x0 + y0 - k);
