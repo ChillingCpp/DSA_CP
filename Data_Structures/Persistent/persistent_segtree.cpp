@@ -6,7 +6,7 @@ struct Perseg
         int val = 0;
     };
     vector<Node> t;
-    vector<int>  root;
+    vector<int>  root; /// root[time] : id of the the time version of tree
     int          n;
     Perseg(vi& a)
     : n(a.size())
