@@ -6,13 +6,16 @@ struct Perseg
         int val = 0;
     };
     vector<Node> t;
-    vector<int>  root;
+    vector<int>  root; /// root[time] : id of the the time version of tree
     int          n;
     Perseg(vi& a)
     : n(a.size())
     {
+        /// reserve before push back for faster
+        /// can change current plus operation with any operation segment tree can support
         root.push_back(build(a, 0, n - 1));
     }
+    /// public function
     void update(int time, int pos, int val)
     {
         root.push_back(update(root[time], 0, n - 1, pos, val));
@@ -21,6 +24,8 @@ struct Perseg
     {
         return query(root[time], 0, n - 1, l, r);
     }
+
+    /// internal function
     int build(vi& a, int l, int r)
     {
         Node no;
