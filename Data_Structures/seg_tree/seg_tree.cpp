@@ -2,7 +2,7 @@
 struct Node
 {
 };
-Node combine(Node a, Node b)
+Node op(Node a, Node b)
 {
     return Node();
 }
@@ -18,13 +18,13 @@ struct SegmentTree
         st.resize(2 * n);
         std::copy(a.begin(), a.end(), st.begin() + n);
         for (int i = n - 1; i > 0; --i)
-            st[i] = combine(st[i << 1], st[i << 1 | 1]);
+            st[i] = op(st[i << 1], st[i << 1 | 1]);
     }
     void set(int p, Node val)
     {
         st[p += n] = val;
         for (p >>= 1; p; p >>= 1)
-            st[p] = combine(st[p << 1], st[p << 1 | 1]);
+            st[p] = op(st[p << 1], st[p << 1 | 1]);
     }
     Node query(int l, int r)
     {
@@ -32,9 +32,9 @@ struct SegmentTree
         for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1)
         {
             if (l & 1)
-                res = combine(res, st[l++]);
+                res = op(res, st[l++]);
             if (r & 1)
-                res = combine(st[--r], res);
+                res = op(st[--r], res);
         }
         return res;
     }
