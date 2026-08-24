@@ -1,46 +1,32 @@
 struct Node
-    {
-        ll sum = 0, len = 1;
-    };
-    struct Lazy
-    {
-        bool      has_set = 0;
-        ll val = 0;
-    };
-    Node op(Node a, Node b)
-    {
-        return Node(a.sum + b.sum, a.len + b.len);
-    }
-    Node tf(Lazy f, Node node)
-    {
-        if (node.len == 0)
-            return node;
-        if (f.has_set)
-            return Node(f.val * node.len, node.len);
-        return Node(node.sum + f.val * node.len, node.len);
-    }
-    /// nw nghĩa là lazy hiện tại, prev là lazy trước đó, hàm op này kết hợp nw và prev
-    Lazy op_l(Lazy nw, Lazy prev)
-    {
-        if (nw.has_set)
-            return nw;
-        else
-        {
-            if (prev.has_set)
-                return Lazy(true, prev.val + nw.val);
-            else
-                return Lazy(false, prev.val + nw.val);
-        }
-    }
-    Node idn()
-    {
-        return {0, 0};
-    }
-    Lazy idl()
-    {
-        return {0, 0};
-    }
-
+{
+    ll  val = 0;
+    int len = 1;
+};
+struct Lazy
+{
+    ll val = 0;
+};
+Lazy op_l(Lazy n, Lazy o)
+{
+    return { n.val + o.val };
+}
+Node tf(Node n, Lazy l)
+{
+    return { n.val + l.val * n.len };
+};
+Node op(Node a, Node b)
+{
+    return { a.val + b.val, a.len + b.len };
+};
+Node idn()
+{
+    return { 0, 0 };
+}
+Lazy idl()
+{
+    return Lazy();
+}
 // Quy ước : node có chỉ số càng nhỏ thì càng gần root, node có chỉ số 1 là root
 struct Seg
 {
