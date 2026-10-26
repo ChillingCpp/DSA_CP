@@ -60,7 +60,7 @@ struct Seg2D
     {
         t[x += n].update(y, val);
         for (x >>= 1; x > 0; x >>= 1)
-            for (int yy = (y + n) >> 1; yy > 0; yy >>= 1)
+            for (int yy = (y + t[x].n) >> 1; yy > 0; yy >>= 1)
                 t[x].t[yy] = t[x << 1].t[yy] + t[x << 1 | 1].t[yy];
     }
     int query(int x1, int x2, int y1, int y2)
