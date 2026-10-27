@@ -59,9 +59,11 @@ struct Seg2D
     void update(int x, int y, int val)
     {
         t[x += n].update(y, val);
-        for (x >>= 1; x > 0; x >>= 1)
+        for (x >>= 1; x > 0; x >>= 1){
+            st[x][y] = st[x << 1][y] +  st[x << 1 | 1][y];
             for (int yy = (y + t[x].n) >> 1; yy > 0; yy >>= 1)
-                t[x].t[yy] = t[x << 1].t[yy] + t[x << 1 | 1].t[yy];
+                t[x].t[yy] = t[x].t[yy << 1] + t[x].t[yy << 1 | 1];
+        }
     }
     int query(int x1, int x2, int y1, int y2)
     {
