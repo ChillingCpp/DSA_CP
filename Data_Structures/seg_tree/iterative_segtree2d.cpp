@@ -60,7 +60,7 @@ struct Seg2D
     {
         t[x += n].update(y, val);
         for (x >>= 1; x > 0; x >>= 1){
-            st[x][y] = st[x << 1][y] +  st[x << 1 | 1][y];
+            t[x].t[y] = t[x << 1].t[y] +  t[x << 1 | 1].t[y];
             for (int yy = (y + t[x].n) >> 1; yy > 0; yy >>= 1)
                 t[x].t[yy] = t[x].t[yy << 1] + t[x].t[yy << 1 | 1];
         }
